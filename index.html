@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels, Villas & Homestays</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- ====================================================== -->
+    <!--          PHẦN CSS ĐƯỢC ĐẶT TRONG THẺ STYLE            -->
+    <!-- ====================================================== -->
+    <style>
+        /* --- BIẾN TOÀN CỤC VÀ RESET --- */
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f0f8ff;
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #ddd;
+            --gold-color: #a38b6a;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- CÁC THÀNH PHẦN CHUNG --- */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .bg-light {
+            background-color: var(--secondary-color);
+        }
+
+        /* === HEADER, HERO, BOOKING, CARDS, FEATURE, TESTIMONIAL, PROMOTIONS, FOOTER (KHÔNG ĐỔI) === */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+
+        .hero {
+            height: 75vh;
+            position: relative;
+            color: var(--light-text-color);
+            overflow: hidden
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .6s ease-in-out, visibility .6s ease-in-out
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(13, 76, 92, 0.6), rgba(13, 76, 92, 0.6));
+            z-index: 1
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5)
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-weight: 400;
+            max-width: 600px
+        }
+
+        .booking-section {
+            position: relative;
+            z-index: 5;
+            margin-top: -120px;
+            padding-bottom: 80px
+        }
+
+        .booking-widget {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            max-width: 1000px;
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .booking-tabs {
+            display: inline-flex;
+            background-color: #e9f1f5;
+            border-radius: 50px;
+            padding: 6px;
+            margin-bottom: 25px;
+            border-bottom: none
+        }
+
+        .tab-link {
+            padding: 12px 30px;
+            border: none;
+            background: transparent;
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            margin: 0;
+            transition: all .3s ease
+        }
+
+        .tab-link.active,
+        .tab-link:hover {
+            color: var(--light-text-color);
+            background-color: var(--primary-color);
+            box-shadow: 0 3px 10px rgba(13, 76, 92, 0.2)
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: center;
+            width: 100%
+        }
+
+        .booking-form select,
+        .booking-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: .9rem;
+            background-color: #f9f9f9
+        }
+
+        .booking-form .btn {
+            white-space: nowrap;
+            padding: 12px 35px
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform .3s ease, box-shadow .3s ease;
+            display: flex;
+            flex-direction: column
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(13, 76, 92, 0.12)
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .card-content h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px
+        }
+
+        .card-content p {
+            margin-bottom: 15px;
+            flex-grow: 1
+        }
+
+        .card-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            align-self: flex-start
+        }
+
+        .card-link:hover {
+            text-decoration: underline
+        }
+
+        .card-meta {
+            font-size: .9rem;
+            color: #777;
+            margin-top: auto;
+            padding-top: 10px
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center
+        }
+
+        .feature-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(13, 76, 92, 0.15)
+        }
+
+        .feature-content h2 {
+            margin-bottom: 1.5rem;
+            text-align: left
+        }
+
+        .feature-content p {
+            margin-bottom: 1.5rem
+        }
+
+        .feature-content ul {
+            list-style: none;
+            padding-left: 0
+        }
+
+        .feature-content ul li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 1rem;
+            font-weight: 500
+        }
+
+        .feature-content ul li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.2rem
+        }
+
+        .feature-content .btn {
+            margin-top: 1.5rem
+        }
+
+        .testimonial-slider-section {
+            background-color: #fff;
+        }
+
+        .testimonial-slider {
+            position: relative;
+            max-width: 950px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .testimonial-slides-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 20px 60px;
+        }
+
+        .slide-award-image {
+            text-align: center;
+        }
+
+        .slide-award-image img {
+            max-width: 120px;
+            height: auto;
+        }
+
+        .slide-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+        }
+
+        .slide-content .slide-pagination {
+            margin-bottom: 25px;
+        }
+
+        .pagination-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination-dot.active {
+            background-color: var(--accent-color);
+        }
+
+        .slide-content .review-title {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+        }
+
+        .slide-content .review-body {
+            font-family: var(--font-body);
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .slide-content .review-author {
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .slide-content .review-date {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 3px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .slide-arrow:hover {
+            opacity: 1;
+        }
+
+        .prev-arrow {
+            left: 0px;
+        }
+
+        .next-arrow {
+            right: 0px;
+        }
+
+        .promo-grid-featured {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 30px;
+            height: 500px
+        }
+
+        .promo-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            transition: transform .3s ease
+        }
+
+        .promo-card:hover {
+            transform: scale(1.03)
+        }
+
+        .promo-card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform .4s ease
+        }
+
+        .promo-card:hover .promo-card-img {
+            transform: scale(1.1)
+        }
+
+        .promo-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
+            z-index: 2
+        }
+
+        .promo-card-content {
+            position: relative;
+            z-index: 3
+        }
+
+        .promo-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 5px
+        }
+
+        .promo-card p {
+            font-size: 1rem;
+            opacity: .9
+        }
+
+        .promo-card-featured {
+            grid-column: 1/2;
+            grid-row: 1/3
+        }
+
+        .promo-card-secondary-1 {
+            grid-column: 2/3;
+            grid-row: 1/2
+        }
+
+        .promo-card-secondary-2 {
+            grid-column: 2/3;
+            grid-row: 2/3
+        }
+
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+        }
+
+        .footer-top h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+            margin-bottom: 20px
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50px;
+            color: var(--light-text-color)
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6)
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .footer-column a,
+        .footer-column p {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color .3s ease
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color)
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2)
+        }
+
+        /* ======================================================= */
+        /* === CSS MỚI CHO CÁC MỤC TRONG TAB HOTEL === */
+        /* ======================================================= */
+
+        .hotel-brands-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .hotel-brand-card {
+            text-align: center;
+        }
+
+        .hotel-brand-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hotel-brand-card img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(13, 76, 92, 0.12);
+        }
+
+        .hotel-brand-card h3 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .hotel-brand-card p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .entertainment-section {
+            padding: 0;
+            margin: 80px 0;
+        }
+
+        .entertainment-container {
+            position: relative;
+            min-height: 450px;
+            background-image: url('http://wwcdn.weddingwire.com/vendor/65001_70000/67195/thumbnails/1200x1200_1367340572768-hotel-evening-new.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text-color);
+        }
+
+        .entertainment-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 76, 92, 0.6);
+            z-index: 1;
+        }
+
+        .entertainment-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .entertainment-content h2 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .entertainment-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            border: 2px solid var(--light-text-color);
+            color: var(--light-text-color);
+            padding: 12px 35px;
+        }
+
+        .btn-outline-light:hover {
+            background: var(--light-text-color);
+            color: var(--primary-color);
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .experience-item-reverse .experience-image {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .experience-item-reverse .experience-details {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .experience-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(13, 76, 92, 0.15);
+        }
+
+        .experience-details h3 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .experience-details .tagline {
+            font-weight: 600;
+            color: var(--gold-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .cuisine-grid-showcase {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .cuisine-grid-showcase img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cuisine-grid-showcase img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(13, 76, 92, 0.12);
+        }
+
+        .photo-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .photo-gallery-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-gallery-grid img:hover {
+            opacity: 0.85;
+        }
+
+        .final-cta-section {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            text-align: center;
+        }
+
+        .final-cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .final-cta-section .btn-primary:hover {
+            background-color: #26d8a4;
+        }
+
+        /* --- CSS MỚI CHO PHẦN BLOG TRONG TAB HOTEL --- */
+        .hotel-blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* Đổi thành 3 cột */
+            gap: 30px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+
+            .main-nav,
+            .header-right .btn {
+                display: none;
+            }
+
+            .header-right {
+                flex: 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .header-left {
+                flex: 0;
+            }
+
+            .hotel-brands-grid,
+            .cuisine-grid-showcase,
+            .hotel-blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .booking-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+                background: transparent;
+                padding: 0;
+            }
+
+            .tab-link {
+                margin: 5px;
+            }
+
+            .booking-form,
+            .card-grid,
+            .hotel-brands-grid,
+            .experience-item,
+            .photo-gallery-grid,
+            .hotel-blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-item-reverse .experience-image,
+            .experience-item-reverse .experience-details {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .experience-image {
+                margin-bottom: 2rem;
+            }
+
+            .promo-grid-featured {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .promo-card,
+            .promo-card-featured,
+            .promo-card-secondary-1,
+            .promo-card-secondary-2 {
+                min-height: 250px;
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-image {
+                order: -1;
+                margin-bottom: 30px;
+            }
+
+            .feature-content h2 {
+                text-align: center;
+            }
+
+            .testimonial-slide {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+                padding: 10px 45px;
+            }
+
+            .slide-award-image {
+                display: none;
+            }
+
+            .slide-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .entertainment-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .cuisine-grid-showcase {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .cuisine-grid-showcase,
+            .hotel-brands-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Nơi Lưu Trú có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        /* Đặt min-width hoặc width cụ thể cho sub menu */
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <div class="header-center"><a href="index.html" class="logo">DEMOBAY</a></div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg></div>
+                    <ul class="language-dropdown">
+                        <li><a href="#">Tiếng Việt</a></li>
+                        <li><a href="#">English</a></li>
+                    </ul>
+                </div><a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SLIDESHOW SECTION -->
+    <section class="hero">
+        <div class="hero-slide active" data-slide="home-content"
+            style="background-image: url('https://cf.bstatic.com/xdata/images/hotel/max1024x768/219414831.jpg?k=c91c2cfd8ccabcd4ad214cc33b7c0450e4e1decb1f1a0acb8c92c77e815129b6&o=&hp=1');">
+            <div class="hero-content">
+                <h1>Trải Nghiệm Đẳng Cấp</h1>
+                <p>Khám phá bộ sưu tập Hotels, Villas và Homestays độc đáo của chúng tôi.</p>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="hotel-content"
+            style="background-image: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop');">
+            <div class="hero-content">
+                <h1>Khách Sạn Sang Trọng</h1>
+                <p>Nơi tiện nghi hiện đại và dịch vụ hoàn hảo giao thoa.</p>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="villa-content"
+            style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920');">
+            <div class="hero-content">
+                <h1>Villa Biệt Lập & Riêng Tư</h1>
+                <p>Tận hưởng không gian độc quyền giữa thiên nhiên thơ mộng.</p>
+            </div>
+        </div>
+        <div class="hero-slide" data-slide="homestay-content"
+            style="background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=1920');">
+            <div class="hero-content">
+                <h1>Homestay Ấm Cúng & Gần Gũi</h1>
+                <p>Sống như người bản địa và khám phá văn hóa địa phương.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING SECTION -->
+    <section class="booking-section">
+        <div class="booking-widget">
+            <div class="booking-tabs"><button class="tab-link active" data-target="#home-content">Trang
+                    chủ</button><button class="tab-link" data-target="#hotel-content">Hotel</button><button
+                    class="tab-link" data-target="#villa-content">Villa</button><button class="tab-link"
+                    data-target="#homestay-content">Homestay</button></div>
+            <div class="booking-form"><select>
+                    <option>Chọn loại hình lưu trú</option>
+                </select><input type="text" value="26/06/2025 - 27/06/2025" placeholder="Ngày nhận - trả phòng"><select>
+                    <option>2 Người lớn, 1 Phòng</option>
+                </select><button class="btn btn-primary">Kiểm Tra</button></div>
+        </div>
+    </section>
+
+    <main>
+        <!-- ====================== -->
+        <!-- HOME CONTENT PANEL     -->
+        <!-- ====================== -->
+        <div id="home-content" class="tab-content-panel">
+            <section id="accommodation" class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Nơi Lưu Trú Hoàn Hảo</h2>
+                    <p class="section-subtitle">Dù bạn tìm kiếm sự sang trọng của khách sạn, không gian riêng tư của
+                        villa hay sự ấm cúng của homestay, chúng tôi đều có lựa chọn dành cho bạn.</p>
+                    <div class="card-grid">
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Demo Hotel">
+                            <div class="card-content">
+                                <h3>Demo Hotels</h3>
+                                <p>Trải nghiệm dịch vụ 5 sao và tiện nghi hiện đại với tầm nhìn hướng biển tuyệt đẹp.
+                                </p><a href="#" class="card-link">Xem Chi Tiết →</a>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Demo Villa">
+                            <div class="card-content">
+                                <h3>Demo Villas</h3>
+                                <p>Không gian riêng tư tuyệt đối với hồ bơi riêng, lý tưởng cho gia đình và các cặp đôi.
+                                </p><a href="#" class="card-link">Xem Chi Tiết →</a>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Demo Homestay">
+                            <div class="card-content">
+                                <h3>Demo Homestays</h3>
+                                <p>Cảm nhận sự ấm cúng, gần gũi với văn hóa bản địa trong những căn homestay đầy phong
+                                    cách.</p><a href="#" class="card-link">Xem Chi Tiết →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="feature-section section-padding bg-light">
+                <div class="container feature-container">
+                    <div class="feature-image"><img
+                            src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Resort Feature"></div>
+                    <div class="feature-content">
+                        <h2 class="section-title" style="text-align: left;">Thiên Đường Nghỉ Dưỡng Của Riêng Bạn</h2>
+                        <p>Tại Demo, mỗi chi tiết đều được chăm chút để mang đến cho bạn một kỳ nghỉ không thể nào quên.
+                            Hãy để chúng tôi chăm sóc bạn.</p>
+                        <ul>
+                            <li>Vị trí đắc địa ngay bờ biển</li>
+                            <li>Thiết kế kiến trúc độc đáo, hòa mình với thiên nhiên</li>
+                            <li>Dịch vụ cá nhân hóa, tận tâm 24/7</li>
+                            <li>Hệ sinh thái tiện ích đa dạng và đẳng cấp</li>
+                        </ul><a href="#" class="btn btn-secondary">Khám Phá Thêm</a>
+                    </div>
+                </div>
+            </section>
+            <section id="testimonials-slider" class="testimonial-slider-section section-padding">
+                <div class="container">
+                    <h2 class="section-title">Khách Hàng Nói Về Chúng Tôi</h2>
+                    <p class="section-subtitle">Niềm vui và sự hài lòng của bạn là nguồn động lực lớn nhất của chúng
+                        tôi.</p>
+                    <div class="testimonial-slider">
+                        <div class="testimonial-slides-container">
+                            <div class="testimonial-slide">
+                                <div class="slide-award-image"><img
+                                        src="https://hoiana.com/wp-content/uploads/2022/04/TC_2022_LL_GREEN_BG.svg"
+                                        alt="Tripadvisor Travellers' Choice 2022"></div>
+                                <div class="slide-content">
+                                    <h3>New World Hoiana Hotel</h3>
+                                    <div class="slide-pagination"></div>
+                                    <p class="review-title">Will Visit Again!</p>
+                                    <p class="review-body">New World Hoiana is Very brand new and fine golf course,
+                                        staff is so friendly to us. Want to be there again!</p>
+                                    <p class="review-author">MS. JENNY SEO</p>
+                                    <p class="review-date">Nov 2022</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-slide">
+                                <div class="slide-award-image"><img
+                                        src="https://hoiana.com/wp-content/uploads/2022/04/TC_2022_LL_GREEN_BG.svg"
+                                        alt="Tripadvisor Travellers' Choice 2022"></div>
+                                <div class="slide-content">
+                                    <h3>Demo Bay Villa</h3>
+                                    <div class="slide-pagination"></div>
+                                    <p class="review-title">Trải nghiệm tuyệt vời!</p>
+                                    <p class="review-body">Villa sang trọng, sạch sẽ, hồ bơi riêng rất thích. Nhân viên
+                                        nhiệt tình và chuyên nghiệp. Gia đình tôi đã có một kỳ nghỉ không thể quên.</p>
+                                    <p class="review-author">Gia Đình Anh Minh</p>
+                                    <p class="review-date">Tháng 6, 2024</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-slide">
+                                <div class="slide-award-image"><img
+                                        src="https://hoiana.com/wp-content/uploads/2022/04/TC_2022_LL_GREEN_BG.svg"
+                                        alt="Tripadvisor Travellers' Choice 2022"></div>
+                                <div class="slide-content">
+                                    <h3>Cozy Homestay</h3>
+                                    <div class="slide-pagination"></div>
+                                    <p class="review-title">Ấm cúng như ở nhà</p>
+                                    <p class="review-body">Homestay nhỏ xinh, decor rất có gu. Anh chị chủ nhà cực kỳ
+                                        thân thiện, chỉ dẫn tận tình. Chắc chắn sẽ giới thiệu cho bạn bè.</p>
+                                    <p class="review-author">Chị Ngọc Lan</p>
+                                    <p class="review-date">Tháng 5, 2024</p>
+                                </div>
+                            </div>
+                        </div><button class="slide-arrow prev-arrow">←</button><button
+                            class="slide-arrow next-arrow">→</button>
+                    </div>
+                </div>
+            </section>
+            <section id="promotions" class="section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Ưu Đãi Đặc Biệt</h2>
+                    <p class="section-subtitle">Đừng bỏ lỡ những khuyến mãi hấp dẫn nhất để kỳ nghỉ của bạn thêm trọn
+                        vẹn.</p>
+                    <div class="promo-grid-featured">
+                        <div class="promo-card promo-card-featured"><img class="promo-card-img"
+                                src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Early Bird Offer">
+                            <div class="promo-card-content">
+                                <h3>Ưu Đãi Đặt Sớm</h3>
+                                <p>Tiết kiệm đến 20% khi đặt phòng trước 30 ngày.</p>
+                            </div>
+                        </div>
+                        <div class="promo-card promo-card-secondary-1"><img class="promo-card-img"
+                                src="https://citrabuanaprakarsa.com/wp-content/uploads/2020/01/DSC01825-810x440.jpg"
+                                alt="Long Stay Offer">
+                            <div class="promo-card-content">
+                                <h3>Ưu Đãi Ở Dài Ngày</h3>
+                            </div>
+                        </div>
+                        <div class="promo-card promo-card-secondary-2"><img class="promo-card-img"
+                                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Spa Package">
+                            <div class="promo-card-content">
+                                <h3>Gói Thư Giãn Spa</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="blog" class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Blog & Cẩm Nang Du Lịch</h2>
+                    <p class="section-subtitle">Khám phá những câu chuyện, kinh nghiệm và bí quyết du lịch hữu ích từ
+                        Demo Bay.</p>
+                    <div class="card-grid">
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Blog Post 1">
+                            <div class="card-content">
+                                <h3>Top 5 hoạt động không thể bỏ lỡ tại Demo</h3>
+                                <p class="card-meta">Tháng 7, 2024 | Cẩm Nang</p>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Blog Post 2">
+                            <div class="card-content">
+                                <h3>Ẩm thực địa phương: Hành trình của hương vị</h3>
+                                <p class="card-meta">Tháng 6, 2024 | Khám Phá</p>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Blog Post 3">
+                            <div class="card-content">
+                                <h3>Bí quyết để có một chuyến đi thư giãn trọn vẹn</h3>
+                                <p class="card-meta">Tháng 5, 2024 | Mẹo Du Lịch</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center"><a href="#" class="btn btn-secondary">Xem Tất Cả Bài Viết</a></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ====================== -->
+        <!-- HOTEL CONTENT PANEL    -->
+        <!-- ====================== -->
+        <div id="hotel-content" class="tab-content-panel" style="display: none;">
+            <!-- 1. Accommodation Brands Section -->
+            <!-- Swiper styles -->
+            <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Thiên Đường Nghỉ Dưỡng Demo</h2>
+                    <p class="section-subtitle">
+                        Mang đến chất lượng dịch vụ lưu trú đỉnh cao với các phòng nghỉ, phòng suite và villa sang trọng
+                        tại bốn thương hiệu khách sạn của chúng tôi.
+                    </p>
+
+                    <div class="swiper hotel-brands-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide hotel-brand-card">
+                                <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                    alt="Demo Hotel & Suites" />
+                                <h3>Demo HOTEL & SUITES</h3>
+                                <p>Trải nghiệm những dịch vụ đẳng cấp nhất</p>
+                            </div>
+                            <div class="swiper-slide hotel-brand-card">
+                                <img src="https://pix1.agoda.net/hotelimages/agoda-homes/7967638/8f05b9fdf74ef758c20ccdf766787378.jpg"
+                                    alt="New Azure World Hotel" />
+                                <h3>NEW WORLD HOTEL</h3>
+                                <p>Kỳ nghỉ dưỡng hạng sang</p>
+                            </div>
+                            <div class="swiper-slide hotel-brand-card">
+                                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop"
+                                    alt="Demo Residences" />
+                                <h3>Demo RESIDENCES</h3>
+                                <p>Tận hưởng cảm giác như ở nhà</p>
+                            </div>
+                            <div class="swiper-slide hotel-brand-card">
+                                <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                    alt="New Azure World Beach Resort" />
+                                <h3>NEW WORLD BEACH RESORT</h3>
+                                <p>Trải nghiệm phong cách mới</p>
+                            </div>
+                        </div>
+
+                        <!-- Navigation buttons -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+
+                        <!-- Pagination dots -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Swiper script -->
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script>
+                const swiper = new Swiper('.hotel-brands-slider', {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: true,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                        },
+                    },
+                });
+            </script>
+
+
+
+            <!-- 2. Entertainment Section -->
+            <section class="entertainment-section">
+                <div class="container">
+                    <div class="entertainment-container">
+                        <div class="entertainment-overlay"></div>
+                        <div class="entertainment-content">
+                            <h2>Giải Trí</h2>
+                            <p>Tận hưởng không gian nghỉ dưỡng đặc biệt, lắng mạn độc nhất trên thế giới với các dịch vụ
+                                lưu trú đẳng cấp, muôn điều hay khám phá và vui chơi.</p><a href="#"
+                                class="btn btn-outline-light">Tìm Hiểu Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Signature Experiences Section -->
+            <section class="experiences-section section-padding bg-light">
+                <div class="container">
+                    <div class="experience-item">
+                        <div class="experience-image"><img
+                                src="https://saffronnhap.com/wp-content/uploads/2021/01/mot-so-loai-hinh-massage-thu-gian-tai-spa-kinh-doanh-pho-bien-5-loai-hinh-spa-pho-bien-trong-kinh-doanh-spa1.jpg"
+                                alt="Thư giãn tại Spa"></div>
+                        <div class="experience-details"><span class="tagline">TÁI TẠO NĂNG LƯỢNG</span>
+                            <h3>Trị Liệu & Spa</h3>
+                            <p>Hãy để mọi giác quan được đánh thức tại không gian spa thanh bình của chúng tôi. Với các
+                                liệu pháp trị liệu độc đáo từ thiên nhiên và đội ngũ chuyên viên tay nghề cao, đây là
+                                nơi bạn tìm lại sự cân bằng cho cơ thể và tâm hồn.</p><a href="#"
+                                class="btn btn-secondary" style="margin-top: 1rem;">Khám Phá Spa</a>
+                        </div>
+                    </div>
+                    <div class="experience-item experience-item-reverse">
+                        <div class="experience-image"><img
+                                src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?q=80&w=2070&auto=format&fit=crop"
+                                alt="Chơi Golf"></div>
+                        <div class="experience-details"><span class="tagline">CHINH PHỤC THỬ THÁCH</span>
+                            <h3>Sân Golf Đẳng Cấp</h3>
+                            <p>Trải nghiệm những vòng golf đầy hứng khởi tại sân golf 18 lỗ tiêu chuẩn quốc tế, được
+                                thiết kế bởi những tên tuổi huyền thoại. Khung cảnh đại dương hùng vĩ và những đường
+                                fairway xanh mướt sẽ mang đến những thử thách khó quên.</p><a href="#"
+                                class="btn btn-secondary" style="margin-top: 1rem;">Xem Chi Tiết Sân Golf</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Cuisine Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Ẩm Thực Tinh Tế</h2>
+                    <p class="section-subtitle">Với hơn 20 nhà hàng và quán bar, chúng tôi mang đến cho bạn nhiều lựa
+                        chọn với trải nghiệm ẩm thực phong phú nhất.</p>
+                    <div class="cuisine-grid-showcase"><img
+                            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Fine Dining Restaurant"><img
+                            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Casual Eatery"><img
+                            src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Beachfront Bar"><img
+                            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Elegant Restaurant Interior"></div>
+                </div>
+            </section>
+
+            <!-- 5. Photo Gallery Section -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Khoảnh Khắc Tại Demo</h2>
+                    <p class="section-subtitle">Lưu giữ những kỷ niệm đẹp trong từng không gian được chăm chút tỉ mỉ của
+                        chúng tôi.</p>
+                    <div class="photo-gallery-grid"><img
+                            src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop"
+                            alt="Sảnh khách sạn"><img
+                            src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop"
+                            alt="Chi tiết phòng ngủ"><img
+                            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=2070&auto=format&fit=crop"
+                            alt="Hồ bơi buổi tối"><img
+                            src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=2070&auto=format&fit=crop"
+                            alt="Bãi biển riêng"></div>
+                    <div class="text-center"><a href="#" class="btn btn-secondary">Xem Thêm Hình Ảnh</a></div>
+                </div>
+            </section>
+
+            <!-- 6. Hotel Blog Section (3 CỘT MỚI) -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Tin Tức & Sự Kiện</h2>
+                    <p class="section-subtitle">Cập nhật những thông tin mới nhất và các hoạt động thú vị chỉ có tại
+                        khách sạn của chúng tôi.</p>
+                    <div class="hotel-blog-grid">
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2070&auto=format&fit=crop"
+                                alt="Bí quyết nâng tầm kỳ nghỉ">
+                            <div class="card-content">
+                                <h3>Bí quyết nâng tầm kỳ nghỉ</h3>
+                                <p class="card-meta">Tháng 7, 2024 | Mẹo Vặt</p>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=2070&auto=format&fit=crop"
+                                alt="Ẩm thực 5 sao">
+                            <div class="card-content">
+                                <h3>Sự kiện ẩm thực 5 sao</h3>
+                                <p class="card-meta">Tháng 8, 2024 | Sự Kiện</p>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=2070&auto=format&fit=crop"
+                                alt="Hồ bơi vô cực">
+                            <div class="card-content">
+                                <h3>Hồ bơi vô cực: Điểm nhấn của resort</h3>
+                                <p class="card-meta">Tháng 9, 2024 | Trải Nghiệm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Final CTA Section -->
+            <section class="final-cta-section section-padding">
+                <div class="container">
+                    <h2>Kỳ Nghỉ Trong Mơ Đang Chờ Đón</h2><a href="#" class="btn btn-primary">Đặt Phòng Ngay</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ====================== -->
+        <!-- VILLA CONTENT PANEL    -->
+        <!-- ====================== -->
+        <div id="villa-content" class="tab-content-panel" style="display: none;">
+            <!-- 1. Feature Section (Giữ nguyên) -->
+            <section class="feature-section section-padding">
+                <div class="container feature-container">
+                    <div class="feature-image"><img
+                            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Luxury Villa"></div>
+                    <div class="feature-content">
+                        <h2 class="section-title" style="text-align: left;">Ốc Đảo Riêng Tư Của Bạn</h2>
+                        <p>Tận hưởng sự sang trọng và biệt lập tuyệt đối tại các căn villa của Demo. Với không gian rộng
+                            rãi, hồ bơi riêng và dịch vụ cá nhân hóa, đây là lựa chọn hoàn hảo cho kỳ nghỉ của gia đình
+                            hay những chuyến đi lãng mạn.</p>
+                        <ul>
+                            <li>Hồ bơi vô cực riêng tư</li>
+                            <li>Không gian sinh hoạt và bếp đầy đủ tiện nghi</li>
+                            <li>Dịch vụ quản gia và đầu bếp tại gia theo yêu cầu</li>
+                            <li>Sân vườn và khu vực BBQ ngoài trời</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Amenity Showcase (MỚI) -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Tiện Ích Độc Quyền</h2>
+                    <p class="section-subtitle">Mọi thứ bạn cần cho một kỳ nghỉ hoàn hảo đều nằm trong tầm tay.</p>
+                    <div class="amenity-grid">
+                        <div class="amenity-item">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-1.39-1.59-2.2-3.33-2.2-5.49 0-4.42 3.58-8 8-8 .34 0 .67.02.99.06.8.09 1.51-.54 1.6-1.34C21.57 4.1 20.9 3.4 20.1 3.3 17.65 2.56 14.9 2 12 2zm0 4c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z" />
+                            </svg>
+                            <h4>Hồ Bơi Riêng</h4>
+                            <p>Đắm mình trong làn nước mát tại hồ bơi riêng tư tuyệt đối.</p>
+                        </div>
+                        <div class="amenity-item">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 14H6v-4h6v4zm0-6H6V8h6v4zm8 6h-6v-4h6v4zm0-6h-6V8h6v4z" />
+                            </svg>
+                            <h4>Bếp Đầy Đủ</h4>
+                            <p>Tự do trổ tài nấu nướng với không gian bếp hiện đại, tiện nghi.</p>
+                        </div>
+                        <div class="amenity-item">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M21 10c-1.1 0-2 .9-2 2v3H5v-3c0-1.1-.9-2-2-2s-2 .9-2 2v5c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2zm-3-4H6c-1.1 0-2 .9-2 2v2h16V8c0-1.1-.9-2-2-2z" />
+                            </svg>
+                            <h4>Không Gian Rộng</h4>
+                            <p>Phòng khách và sinh hoạt chung thoáng đãng cho cả gia đình.</p>
+                        </div>
+                        <div class="amenity-item">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                            <h4>Dịch Vụ Quản Gia</h4>
+                            <p>Đội ngũ quản gia chuyên nghiệp luôn sẵn sàng hỗ trợ bạn 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Villa Collection Section (Nâng cấp) -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Bộ Sưu Tập Villa Đẳng Cấp</h2>
+                    <p class="section-subtitle">Mỗi căn villa là một tuyệt tác kiến trúc, mang đến một không gian nghỉ
+                        dưỡng độc đáo và khó quên.</p>
+                    <div class="villa-collection-grid">
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Oceanfront Villa">
+                            <div class="card-content">
+                                <h3>OCEANFRONT VILLA</h3>
+                                <p>Thức giấc với tiếng sóng vỗ và tầm nhìn đại dương bao la.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="Garden Villa">
+                            <div class="card-content">
+                                <h3>GARDEN VILLA</h3>
+                                <p>Hòa mình vào thiên nhiên trong khu vườn nhiệt đới xanh mát.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://www.seyvillas.com/img/objects/199/1920x1114_75/aerial-villas.jpg"
+                                alt="Hillside Villa">
+                            <div class="card-content">
+                                <h3>HILLSIDE VILLA</h3>
+                                <p>Tầm nhìn toàn cảnh từ trên sườn đồi thơ mộng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Personalized Services (MỚI) -->
+            <section class="experiences-section section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Dịch Vụ Cá Nhân Hóa</h2>
+                    <p class="section-subtitle">Chúng tôi biến kỳ nghỉ của bạn thành một trải nghiệm được "đo ni đóng
+                        giày" hoàn hảo.</p>
+                    <div class="experience-item">
+                        <div class="experience-image">
+                            <img src="https://luxuo.vn/wp-content/uploads/2024/11/a2.jpg" alt="Đầu bếp tại gia">
+                        </div>
+                        <div class="experience-details">
+                            <span class="tagline">HƯƠNG VỊ RIÊNG TƯ</span>
+                            <h3>Ẩm Thực Tại Gia</h3>
+                            <p>Yêu cầu một đầu bếp riêng để chuẩn bị những bữa ăn thịnh soạn ngay tại gian bếp của
+                                villa, hoặc một bữa tiệc BBQ ngoài trời ấm cúng bên hồ bơi cho gia đình và bạn bè.</p>
+                            <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Yêu Cầu Dịch Vụ</a>
+                        </div>
+                    </div>
+                    <div class="experience-item experience-item-reverse">
+                        <div class="experience-image">
+                            <img src="https://img.jamesedition.com/listing_images/2019/08/15/12/28/05/d8ae55b2-ed28-4af6-9d62-63b6aa23dfe3/je/2000xxs.jpg"
+                                alt="Spa tại villa">
+                        </div>
+                        <div class="experience-details">
+                            <span class="tagline">THƯ GIÃN TUYỆT ĐỐI</span>
+                            <h3>Spa Tại Villa</h3>
+                            <p>Không cần đi đâu xa, các chuyên viên trị liệu của chúng tôi sẽ mang đến những liệu pháp
+                                spa thư giãn nhất ngay tại không gian yên tĩnh và riêng tư của chính căn villa bạn ở.
+                            </p>
+                            <a href="#" class="btn btn-secondary" style="margin-top: 1rem;">Đặt Lịch Trị Liệu</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <style>
+                /* === CSS MỚI CHO CÁC SECTION TRONG TAB VILLA === */
+                .amenity-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 30px;
+                }
+
+                .amenity-item {
+                    text-align: center;
+                    padding: 20px;
+                }
+
+                .amenity-item .icon {
+                    width: 60px;
+                    height: 60px;
+                    margin: 0 auto 1rem auto;
+                    color: var(--primary-color);
+                }
+
+                .amenity-item h4 {
+                    font-size: 1.1rem;
+                    color: var(--primary-color);
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                }
+
+                .villa-gallery-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 20px;
+                }
+
+                .villa-gallery-grid img {
+                    width: 100%;
+                    height: 280px;
+                    object-fit: cover;
+                    border-radius: 12px;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .villa-gallery-grid img:hover {
+                    transform: scale(1.03);
+                    box-shadow: 0 10px 25px rgba(13, 76, 92, 0.12);
+                }
+
+                .villa-collection-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 30px;
+                }
+            </style>
+            <!-- 7. Villa Blog Section -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Tin Tức & Trải Nghiệm Villa</h2>
+                    <p class="section-subtitle">Khám phá những câu chuyện và mẹo hay để tận hưởng trọn vẹn kỳ nghỉ tại
+                        villa sang trọng.</p>
+                    <div class="hotel-blog-grid">
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDJ8fHZpbGxhfGVufDB8fHx8MTcxOTQ2OTY2Ng&ixlib=rb-4.0.3&q=80&w=800"
+                                alt="Mẹo chọn villa">
+                            <div class="card-content">
+                                <h3>Mẹo chọn villa phù hợp</h3>
+                                <p class="card-meta">Tháng 7, 2024 | Mẹo Vặt</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDF8fHZpbGxhfGVufDB8fHx8MTcxOTQ2OTY2Ng&ixlib=rb-4.0.3&q=80&w=800"
+                                alt="Tiệc BBQ tại villa">
+                            <div class="card-content">
+                                <h3>Tổ chức tiệc BBQ tại villa</h3>
+                                <p class="card-meta">Tháng 8, 2024 | Trải Nghiệm</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://www.exceptionalvillas.com/public/upload/listing_photos_resize/w1900xh1900-Villa-Elements-43.JPG"
+                                alt="Spa trong villa">
+                            <div class="card-content">
+                                <h3>Spa tại villa: Bí quyết thư giãn</h3>
+                                <p class="card-meta">Tháng 9, 2024 | Sức Khỏe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <style>
+                .hotel-blog-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 30px;
+                }
+
+                .hotel-blog-grid .card {
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .hotel-blog-grid .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                }
+
+                .hotel-blog-grid .card img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                }
+
+                .hotel-blog-grid .card-content {
+                    padding: 15px;
+                }
+
+                .hotel-blog-grid .card-content h3 {
+                    font-size: 1.1rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                .hotel-blog-grid .card-meta {
+                    font-size: 0.9rem;
+                    color: #666;
+                }
+            </style>
+
+            <!-- 5. Villa Gallery (MỚI) -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Khám Phá Không Gian Sống</h2>
+                    <p class="section-subtitle">Hình dung về kỳ nghỉ của bạn qua những hình ảnh chân thực nhất từ các
+                        căn villa của chúng tôi.</p>
+                    <div class="villa-gallery-grid">
+                        <img src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?w=1000"
+                            alt="Villa living room">
+                        <img src="https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?w=1000"
+                            alt="Villa bedroom">
+                        <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?w=1000"
+                            alt="Villa kitchen">
+                        <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?w=1000"
+                            alt="Villa private pool">
+                        <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?w=1000"
+                            alt="Villa exterior">
+                        <img src="https://images.pexels.com/photos/1457845/pexels-photo-1457845.jpeg?w=1000"
+                            alt="Villa bathroom">
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+            <!-- 6. Final CTA (MỚI) -->
+            <section class="final-cta-section section-padding">
+                <div class="container">
+                    <h2>Lên Kế Hoạch Cho Kỳ Nghỉ Biệt Lập Của Bạn</h2>
+                    <a href="#" class="btn btn-primary">Tìm Villa Lý Tưởng</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ====================== -->
+        <!-- HOMESTAY CONTENT PANEL -->
+        <!-- ====================== -->
+        <div id="homestay-content" class="tab-content-panel" style="display: none;">
+            <section class="feature-section section-padding">
+                <div class="container feature-container">
+                    <div class="feature-image"><img
+                            src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Cozy Homestay"></div>
+                    <div class="feature-content">
+                        <h2 class="section-title" style="text-align: left;">Ấm Áp Như ở Nhà</h2>
+                        <p>Khám phá văn hóa địa phương và tận hưởng sự đón tiếp nồng hậu tại các homestay của Demo. Mỗi
+                            căn nhà là một câu chuyện, được trang trí với tình yêu và sự chăm chút, mang đến cho bạn cảm
+                            giác thân thuộc và gần gũi.</p>
+                        <ul>
+                            <li>Thiết kế độc đáo, đậm chất bản địa</li>
+                            <li>Kết nối với chủ nhà thân thiện</li>
+                            <li>Vị trí thuận tiện để khám phá cuộc sống địa phương</li>
+                            <li>Trải nghiệm ẩm thực và văn hóa đích thực</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Lựa Chọn Homestay Của Bạn</h2>
+                    <p class="section-subtitle">Từ phong cách mộc mạc đến hiện đại, hãy tìm cho mình một không gian thể
+                        hiện cá tính của bạn.</p>
+                    <div class="card-grid">
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="The Rustic Retreat">
+                            <div class="card-content">
+                                <h3>The Rustic Retreat</h3>
+                                <p>Không gian mộc mạc với nội thất gỗ tự nhiên, mang lại cảm giác bình yên và thư thái.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="The Modern Loft">
+                            <div class="card-content">
+                                <h3>The Modern Loft</h3>
+                                <p>Thiết kế tối giản, hiện đại với đầy đủ tiện nghi, dành cho những ai yêu thích sự tinh
+                                    tế.</p>
+                            </div>
+                        </div>
+                        <div class="card"><img
+                                src="https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                                alt="The Bohemian Hideaway">
+                            <div class="card-content">
+                                <h3>The Bohemian Hideaway</h3>
+                                <p>Một góc nhỏ đầy màu sắc và tự do, nơi bạn có thể tìm thấy nguồn cảm hứng sáng tạo.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <style>
+                .photo-gallery-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 20px;
+                }
+
+                .photo-gallery-grid img {
+                    width: 100%;
+                    height: 250px;
+                    /* Đặt chiều cao cố định */
+                    object-fit: cover;
+                    /* Đảm bảo ảnh không méo, lấp đầy khung */
+                    border-radius: 8px;
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .photo-gallery-grid img:hover {
+                    transform: scale(1.03);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+                }
+            </style>
+            <!-- 3. Trải Nghiệm Địa Phương -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Trải Nghiệm Địa Phương</h2>
+                    <p class="section-subtitle">Đắm mình vào nhịp sống địa phương và khám phá văn hóa bản địa thông qua
+                        những hoạt động đặc sắc.</p>
+                    <div class="card-grid">
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/3617544/pexels-photo-3617544.jpeg?w=800"
+                                alt="Lớp nấu ăn">
+                            <div class="card-content">
+                                <h3>Lớp Nấu Ăn Truyền Thống</h3>
+                                <p>Học cách chế biến những món ăn đặc sản cùng người bản xứ.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/672358/pexels-photo-672358.jpeg?w=800"
+                                alt="Chợ địa phương">
+                            <div class="card-content">
+                                <h3>Tham Quan Chợ Địa Phương</h3>
+                                <p>Khám phá những khu chợ nhộn nhịp và độc đáo của địa phương.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://pvv-photo.phuotvivu.com/res/photo/4/d/0/6/s0x0/qiongru-195731095755-hoi-an-va-nhung-cung-duong-dap-xe-ly-tuong-nhat-the.jpg"
+                                alt="Tour xe đạp">
+                            <div class="card-content">
+                                <h3>Tour Xe Đạp Vùng Quê</h3>
+                                <p>Đạp xe qua những cung đường làng yên bình và thơ mộng.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Ẩm Thực Tại Homestay -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Ẩm Thực Tại Homestay</h2>
+                    <p class="section-subtitle">Những bữa ăn đậm đà hương vị quê nhà, do chính tay chủ nhà chuẩn bị.</p>
+                    <div class="cuisine-grid-showcase">
+                        <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?w=600"
+                            alt="Bữa ăn gia đình">
+                        <img src="https://images.pexels.com/photos/4106483/pexels-photo-4106483.jpeg?w=600"
+                            alt="Món ăn địa phương">
+                        <img src="https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?w=600"
+                            alt="Bữa tối ngoài trời">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.tj36Mipw_9HcSru3qfSfmgAAAA?pid=Api&P=0&h=220"
+                            alt="Bữa tối ngoài trời">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Khoảnh Khắc Homestay -->
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Khoảnh Khắc Homestay</h2>
+                    <p class="section-subtitle">Những khung hình lưu giữ kỷ niệm đáng nhớ tại homestay.</p>
+                    <div class="photo-gallery-grid">
+                        <img src="https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?w=1000"
+                            alt="Phòng khách homestay">
+                        <img src="https://toplist.vn/images/800px/riverside-boutique-resort-234959.jpg"
+                            alt="Ban công view núi">
+                        <img src="https://images.pexels.com/photos/2884861/pexels-photo-2884861.jpeg?w=1000"
+                            alt="Không gian bên ngoài">
+                        <img src="https://images.pexels.com/photos/1719643/pexels-photo-1719643.jpeg?w=1000"
+                            alt="Góc nhỏ homestay">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Tin Tức & Sự Kiện -->
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <h2 class="section-title">Tin Tức & Sự Kiện</h2>
+                    <p class="section-subtitle">Cập nhật những câu chuyện mới nhất và sự kiện thú vị tại các homestay.
+                    </p>
+                    <div class="hotel-blog-grid">
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/3739122/pexels-photo-3739122.jpeg?w=800"
+                                alt="Mẹo du lịch homestay">
+                            <div class="card-content">
+                                <h3>Mẹo Du Lịch Homestay</h3>
+                                <p class="card-meta">Tháng 7, 2024 | Mẹo Vặt</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.FoNyU-9FLvY9QfoBcOViEQHaEb?pid=Api&P=0&h=220"
+                                alt="Ẩm thực địa phương">
+                            <div class="card-content">
+                                <h3>Ẩm Thực Địa Phương Đặc Sắc</h3>
+                                <p class="card-meta">Tháng 8, 2024 | Ẩm Thực</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?w=800"
+                                alt="Sự kiện văn hóa">
+                            <div class="card-content">
+                                <h3>Sự Kiện Văn Hóa Bản Địa</h3>
+                                <p class="card-meta">Tháng 9, 2024 | Sự Kiện</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <h3>Đăng ký nhận bản tin khuyến mãi</h3>
+                <form class="newsletter-form"><input type="email" placeholder="Nhập email của bạn"><button type="submit"
+                        class="btn btn-primary">Gửi</button></form>
+            </div>
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ Demo</h4><a href="#">Câu Chuyện Của Chúng Tôi</a><a href="#">Tuyển Dụng</a><a href="#">Bền
+                        Vững & Cộng Đồng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách & Điều Khoản</a><a
+                        href="#">Sơ Đồ Trang</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@azurebay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram | YouTube</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Demo. All rights reserved.</p>
+                <p>Địa chỉ: Bãi biển An Bàng, Hội An, Quảng Nam, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- JAVASCRIPT CHO HỆ THỐNG TAB CHÍNH ---
+            const tabs = document.querySelectorAll('.booking-tabs .tab-link');
+            const contentPanels = document.querySelectorAll('.tab-content-panel');
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = tab.dataset.target; const slideId = targetId.substring(1);
+                    tabs.forEach(item => item.classList.remove('active'));
+                    contentPanels.forEach(panel => panel.style.display = 'none');
+                    tab.classList.add('active');
+                    const targetPanel = document.querySelector(targetId);
+                    if (targetPanel) { targetPanel.style.display = 'block'; }
+                    heroSlides.forEach(slide => slide.classList.remove('active'));
+                    const targetSlide = document.querySelector(`.hero-slide[data-slide="${slideId}"]`);
+                    if (targetSlide) { targetSlide.classList.add('active'); }
+                });
+            });
+
+            // --- JAVASCRIPT CHO TESTIMONIAL SLIDER ---
+            const sliderContainer = document.querySelector('.testimonial-slides-container');
+            if (sliderContainer) {
+                const slides = document.querySelectorAll('.testimonial-slide');
+                const nextBtn = document.querySelector('.next-arrow');
+                const prevBtn = document.querySelector('.prev-arrow');
+                const paginationContainers = document.querySelectorAll('.slide-pagination');
+                if (slides.length > 0) {
+                    let currentIndex = 0; const totalSlides = slides.length;
+                    paginationContainers.forEach(container => {
+                        container.innerHTML = '';
+                        for (let i = 0; i < totalSlides; i++) { const dot = document.createElement('span'); dot.classList.add('pagination-dot'); dot.dataset.index = i; container.appendChild(dot); }
+                    });
+                    const allDots = document.querySelectorAll('.pagination-dot');
+                    function updateSlider() {
+                        sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        allDots.forEach(dot => {
+                            dot.classList.remove('active');
+                            if (parseInt(dot.dataset.index) === currentIndex) { document.querySelectorAll(`.pagination-dot[data-index='${currentIndex}']`).forEach(d => d.classList.add('active')); }
+                        });
+                    }
+                    allDots.forEach(dot => { dot.addEventListener('click', () => { currentIndex = parseInt(dot.dataset.index); updateSlider(); }); });
+                    nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
+                    prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
+                    updateSlider();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

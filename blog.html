@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Cẩm Nang Du Lịch - DEMOBAY</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Google Icons (cho ngày tháng) -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* --- BIẾN TOÀN CỤC VÀ RESET (Giữ nguyên) --- */
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f0f8ff;
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #ddd;
+            --gold-color: #a38b6a;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* === HEADER (Giữ nguyên y hệt) === */
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /*
+        =======================================================
+                        CSS CHO TRANG BLOG MỚI
+        =======================================================
+        */
+        .blog-hero {
+            padding: 180px 0 100px 0;
+            background-image: url('https://hotelbriefing.home.blog/wp-content/uploads/2020/12/hotel-briefing-blog-destination-clubs.jpg?w=1024');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: var(--light-text-color);
+            text-align: center;
+        }
+
+        .blog-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(13, 76, 92, 0.7), rgba(13, 76, 92, 0.7));
+            z-index: 1;
+        }
+
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .blog-section {
+            padding: 80px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .blog-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .blog-section-title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .blog-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold-color);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .post-meta .material-icons {
+            font-size: 1rem;
+        }
+
+        /* --- LAYOUT 1: FEATURED + LIST --- */
+        .layout-featured-list {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .featured-post img {
+            border-radius: 8px;
+            margin-bottom: 20px;
+            height: 350px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .featured-post h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .featured-post h3 a:hover {
+            color: var(--accent-color);
+        }
+
+        .featured-post p {
+            color: #555;
+        }
+
+        .post-list-small .post-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .post-list-small .post-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .post-list-small .post-item img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .post-list-small .post-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .post-list-small .post-content h4 a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- LAYOUT 2: 3-COLUMN CARD GRID --- */
+        .layout-three-col-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .post-card {
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .post-card img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .post-card .post-card-content {
+            padding: 20px;
+        }
+
+        .post-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            line-height: 1.4;
+            color: var(--primary-color);
+        }
+
+        .post-card h3 a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- LAYOUT 3: ALTERNATING ROWS --- */
+        .layout-alternating-rows .post-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .layout-alternating-rows .post-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .layout-alternating-rows .post-row.row-reverse .post-image {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .layout-alternating-rows .post-image img {
+            border-radius: 8px;
+            height: 380px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .layout-alternating-rows .post-content h3 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .layout-alternating-rows .post-content h3 a:hover {
+            color: var(--accent-color);
+        }
+
+        .layout-alternating-rows .post-content p {
+            color: #555;
+            margin-top: 15px;
+        }
+
+        /* --- LAYOUT 4: MAGAZINE GRID --- */
+        .layout-magazine-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(280px, auto);
+        }
+
+        .grid-post {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(13, 76, 92, 0.2);
+        }
+
+        .grid-post-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            transition: transform 0.4s ease;
+        }
+
+        .grid-post:hover .grid-post-image {
+            transform: scale(1.05);
+        }
+
+        .grid-post::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+            z-index: 2;
+        }
+
+        .post-content-overlay {
+            position: relative;
+            z-index: 3;
+            padding: 20px;
+        }
+
+        .post-content-overlay h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            line-height: 1.3;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .grid-post-large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .grid-post-large h3 {
+            font-size: 2.2rem;
+        }
+
+        .grid-post-wide {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        /* --- Footer (Giữ nguyên) --- */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-top h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50px;
+            color: var(--light-text-color);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color .3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+
+            .main-nav,
+            .header-right .btn {
+                display: none;
+            }
+
+            .header-right {
+                flex: 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .header-left {
+                flex: 0;
+            }
+
+            .layout-featured-list,
+            .layout-three-col-grid,
+            .layout-alternating-rows .post-row {
+                grid-template-columns: 1fr;
+            }
+
+            .layout-alternating-rows .post-row.row-reverse .post-image {
+                grid-column: 1 / 2;
+                grid-row: auto;
+            }
+
+            .layout-magazine-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: minmax(250px, auto);
+            }
+
+            .grid-post-large,
+            .grid-post-wide {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-section-title {
+                font-size: 2rem;
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .layout-magazine-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-post-large,
+            .grid-post-wide {
+                grid-column: span 1;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <style>
+        .active {
+            color: #2ABF88 !important;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- Header (Y HỆT BẢN CŨ) -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Nơi Lưu Trú có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="logo">DEMOBAY</a>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul class="language-dropdown">
+                        <li><a href="vi/index.html">Tiếng Việt</a></li>
+                        <li><a href="en/index.html">English</a></li>
+                    </ul>
+                </div>
+                <a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+    </style>
+    <style>
+        .main-nav .nav-item-dropdown {
+            position: relative;
+        }
+
+        .main-nav .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            /* Đặt min-width hoặc width cụ thể cho sub menu */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-nav .nav-item-dropdown:hover .sub-menu {
+            display: block;
+        }
+
+        .main-nav .sub-menu li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .main-nav .sub-menu li a {
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="blog-hero">
+            <div class="blog-hero-content">
+                <h1>DEMOBAY Blog</h1>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- SECTION 1: LAYOUT "FEATURED + LIST" -->
+            <section class="blog-section">
+                <div class="section-header">
+                    <h2 class="blog-section-title">Điểm Đến Hấp Dẫn</h2>
+                </div>
+                <div class="layout-featured-list">
+                    <article class="featured-post">
+                        <a href="#"><img
+                                src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?q=80&w=800&auto=format&fit=crop"
+                                alt="Địa điểm tổ chức lễ cưới"></a>
+                        <div class="post-meta"><span class="material-icons">calendar_today</span> June 13, 2025</div>
+                        <h3><a href="#">10 Địa Điểm Tổ Chức Lễ Cưới Hội An: Gợi Ý Từ DEMOBAY Resort</a></h3>
+                        <p>Hội An là một thành phố cổ kính và lãng mạn, nằm bên dòng sông Thu Bồn thơ mộng, là nơi giao
+                            thoa giữa vẻ đẹp thiên nhiên và văn hóa.</p>
+                    </article>
+                    <div class="post-list-small">
+                        <article class="post-item">
+                            <a href="#"><img
+                                    src="https://media.vietnamplus.vn/images/7255a701687d11cb8c6bbc58a6c80785c5067668573f6b9c60cd8d635428a47b4e6054fc829ec5885828bdfea4e5d223374ae3d6d2699e217eb7930190cd4a5e/quang_phu_cau_2_1.jpg"
+                                    alt="Làng nghề"></a>
+                            <div class="post-content">
+                                <h4><a href="#">Làng Nghề Hội An – Khám Phá Những Nghệ Nhân Tài Hoa</a></h4>
+                                <div class="post-meta"><span class="material-icons">calendar_today</span> April 9, 2025
+                                </div>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <a href="#"><img src="https://static.vinwonders.com/2022/07/song-hoai-hoi-an-2.jpeg"
+                                    alt="Sông Hoài"></a>
+                            <div class="post-content">
+                                <h4><a href="#">Sông Hoài Hội An: Khám Phá Dòng Sông Biểu Tượng</a></h4>
+                                <div class="post-meta"><span class="material-icons">calendar_today</span> April 3, 2025
+                                </div>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <a href="#"><img
+                                    src="https://media.vneconomy.vn/640x360/images/upload/2024/03/19/casino.jpeg"
+                                    alt="Casino"></a>
+                            <div class="post-content">
+                                <h4><a href="#">Danh Sách Casino Hợp Pháp Tại Việt Nam Năm 2025</a></h4>
+                                <div class="post-meta"><span class="material-icons">calendar_today</span> April 22, 2025
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: LAYOUT "3-COLUMN CARD GRID" -->
+            <section class="blog-section">
+                <div class="section-header">
+                    <h2 class="blog-section-title">Cẩm Nang Du Lịch</h2>
+                </div>
+                <div class="layout-three-col-grid">
+                    <article class="post-card">
+                        <a href="#"><img
+                                src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800&auto=format&fit=crop"
+                                alt="Kế hoạch du lịch"></a>
+                        <div class="post-card-content">
+                            <div class="post-meta"><span class="material-icons">calendar_today</span> May 15, 2025</div>
+                            <h3><a href="#">Top 10 Resorts Có Xe Đưa Đón Ở Hội An</a></h3>
+                        </div>
+                    </article>
+                    <article class="post-card">
+                        <a href="#"><img src="https://gcs.tripi.vn/public-tripi/tripi-feed/img/476176hdZ/anh-mo-ta.png"
+                                alt="Hội An tháng 6"></a>
+                        <div class="post-card-content">
+                            <div class="post-meta"><span class="material-icons">calendar_today</span> May 15, 2025</div>
+                            <h3><a href="#">Du Lịch Hội An Tháng 6: Top Hoạt Động & Ưu Đãi</a></h3>
+                        </div>
+                    </article>
+                    <article class="post-card">
+                        <a href="#"><img
+                                src="https://ticotravel.com.vn/wp-content/uploads/2023/07/hoi-an-thang-7-9.jpeg"
+                                alt="Hội An tháng 7"></a>
+                        <div class="post-card-content">
+                            <div class="post-meta"><span class="material-icons">calendar_today</span> May 15, 2025</div>
+                            <h3><a href="#">Du Lịch Hội An Tháng 7: Đi Đâu? Chơi Gì?</a></h3>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SECTION 3: LAYOUT "ALTERNATING ROWS" -->
+            <section class="blog-section">
+                <div class="section-header">
+                    <h2 class="blog-section-title">Tin Tức Golf</h2>
+                </div>
+                <div class="layout-alternating-rows">
+                    <article class="post-row">
+                        <div class="post-image">
+                            <a href="#"><img
+                                    src="https://bizweb.dktcdn.net/100/454/998/files/cau-truc-san-golf-1024x579.png?v=1721027003853"
+                                    alt="Sân Golf"></a>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta"><span class="material-icons">calendar_today</span> Jan 17, 2025</div>
+                            <h3><a href="#">Top 4 Sân Golf Hội An & Đà Nẵng Cho Golfer Năm 2025</a></h3>
+                            <p>Hội An và Đà Nẵng không chỉ là những điểm du lịch nổi tiếng tại Việt Nam mà còn là thiên
+                                đường dành cho các golfer nhờ sở hữu những sân golf đẳng cấp thế giới.</p>
+                        </div>
+                    </article>
+                    <article class="post-row row-reverse">
+                        <div class="post-image">
+                            <a href="#"><img src="https://life.thanhcong.vn/wp-content/uploads/2024/03/trang-phuc.jpg"
+                                    alt="Trang phục Golf"></a>
+                        </div>
+                        <div class="post-content">
+                            <div class="post-meta"><span class="material-icons">calendar_today</span> Oct 12, 2024</div>
+                            <h3><a href="#">Trang Phục Chơi Golf: Tiêu Chí Lựa Chọn & Quy Định</a></h3>
+                            <p>Việc lựa chọn trang phục phù hợp không chỉ thể hiện sự tôn trọng đối với bộ môn thể thao
+                                quý tộc này mà còn giúp bạn tự tin và thoải mái hơn trên sân.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- SECTION 4: LAYOUT "MAGAZINE GRID" -->
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <h3>Đăng ký nhận bản tin khuyến mãi</h3>
+                <form class="newsletter-form"><input type="email" placeholder="Nhập email của bạn"><button type="submit"
+                        class="btn btn-primary">Gửi</button></form>
+            </div>
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ DEMOBAY</h4><a href="#">Câu Chuyện Của Chúng Tôi</a><a href="#">Tuyển Dụng</a><a href="#">Bền
+                        Vững & Cộng Đồng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách & Điều Khoản</a><a
+                        href="#">Sơ Đồ Trang</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@demobay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram | YouTube</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 DEMOBAY. All rights reserved.</p>
+                <p>Địa chỉ: Bãi biển An Bàng, Hội An, Quảng Nam, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

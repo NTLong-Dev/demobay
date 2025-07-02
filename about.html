@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Đổi title cho trang mới -->
+    <title>Giới Thiệu - DEMOBAY</title>
+
+    <!-- Google Fonts (Giữ nguyên) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- ====================================================== -->
+    <!--          PHẦN CSS ĐƯỢC ĐẶT TRONG THẺ STYLE            -->
+    <!-- ====================================================== -->
+    <style>
+        /* --- BIẾN TOÀN CỤC VÀ CSS GỐC (GIỮ NGUYÊN) --- */
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f0f8ff;
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #ddd;
+            --gold-color: #a38b6a;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .bg-light {
+            background-color: var(--secondary-color);
+        }
+
+        /* === HEADER VÀ FOOTER (GIỮ NGUYÊN) === */
+
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0
+        }
+
+        .footer-top {
+            display: none;
+            /* Tạm ẩn đi để trang gọn hơn */
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px
+        }
+
+        .footer-column h4 {
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .footer-column a,
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color .3s ease
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2)
+        }
+
+
+        /* ======================================================= */
+        /*           CSS MỚI CHO 7 SECTIONS TRANG GIỚI THIỆU       */
+        /* ======================================================= */
+
+        /* --- Section 1: HERO BANNER --- */
+        .about-hero {
+            padding: 0;
+            height: 60vh;
+            margin-top: 75px;
+            /* Khoảng cách với header */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text-color);
+            background-image: url('https://cdn3.ivivu.com/2024/04/khu-nghi-duong-bien-ivivu-15-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(13, 76, 92, 0.6), rgba(13, 76, 92, 0.6));
+            z-index: 1;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-hero-content p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            font-weight: 400;
+            max-width: 700px;
+        }
+
+        /* --- Section 2: OUR MISSION (LAYOUT 2 CỘT CƠ BẢN) --- */
+        .mission-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .mission-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(13, 76, 92, 0.15);
+        }
+
+        .mission-content h2 {
+            text-align: left;
+        }
+
+        /* --- Section 3: TIMELINE (LAYOUT DÒNG THỜI GIAN) --- */
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid var(--accent-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-content h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* --- Section 4: OUR TEAM (LAYOUT LƯỚI CARD) --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(13, 76, 92, 0.12);
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid var(--secondary-color);
+        }
+
+        .team-member h3 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: var(--gold-color);
+            font-weight: 600;
+        }
+
+        /* --- Section 5: CORE VALUES (LAYOUT ICON TRUNG TÂM) --- */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto 0 auto;
+        }
+
+        .value-item {
+            text-align: center;
+        }
+
+        .value-item .icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px auto;
+            color: var(--accent-color);
+        }
+
+        .value-item h3 {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Section 6: SUSTAINABILITY (LAYOUT 2 CỘT ĐẢO NGƯỢC) --- */
+        .sustainability-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .sustainability-image {
+            order: 2;
+            /* Đảo vị trí ảnh sang phải */
+        }
+
+        .sustainability-content {
+            order: 1;
+            /* Đảo vị trí chữ sang trái */
+        }
+
+        .sustainability-image img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .sustainability-content h2 {
+            text-align: left;
+        }
+
+        /* --- Section 7: CALL TO ACTION (LAYOUT FULL-WIDTH CÔ ĐỌNG) --- */
+        .cta-section {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--light-text-color);
+        }
+
+        .cta-section .btn {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            transform: scale(1.1);
+        }
+
+        .cta-section .btn:hover {
+            background-color: #26d8a4;
+        }
+
+        /* --- RESPONSIVE CHO TRANG GIỚI THIỆU --- */
+        @media (max-width: 768px) {
+
+            .mission-container,
+            .sustainability-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sustainability-image {
+                order: -1;
+                margin-bottom: 30px;
+            }
+
+            .mission-content h2,
+            .sustainability-content h2 {
+                text-align: center;
+            }
+
+            .timeline-container::after {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 15px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 10px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ====================================================== -->
+    <!--                 HEADER (GIỮ NGUYÊN)                     -->
+    <!-- ====================================================== -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Nơi Lưu Trú có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html" class="active">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .active {
+                        color: #2ABF88 !important;
+                        font-weight: bold;
+                    }
+
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="logo">DEMOBAY</a>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul class="language-dropdown">
+                        <li><a href="vi/index.html">Tiếng Việt</a></li>
+                        <li><a href="en/index.html">English</a></li>
+                    </ul>
+                </div>
+                <a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+    </style>
+    <style>
+        .main-nav .nav-item-dropdown {
+            position: relative;
+        }
+
+        .main-nav .sub-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            /* Đặt min-width hoặc width cụ thể cho sub menu */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-nav .nav-item-dropdown:hover .sub-menu {
+            display: block;
+        }
+
+        .main-nav .sub-menu li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .main-nav .sub-menu li a {
+            display: block;
+            padding: 8px 16px;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+    <!-- ====================================================== -->
+    <!--        NỘI DUNG CHÍNH CỦA TRANG "GIỚI THIỆU"          -->
+    <!-- ====================================================== -->
+    <main>
+
+        <!-- SECTION 1: HERO BANNER -->
+        <section class="about-hero">
+            <div class="about-hero-content">
+                <h1>Câu Chuyện Về DEMOBAY</h1>
+                <p>Khởi nguồn từ đam mê tạo nên những kỳ nghỉ đáng nhớ, chúng tôi kiến tạo không gian nơi sự sang trọng
+                    hòa quyện cùng vẻ đẹp thiên nhiên và lòng hiếu khách chân thành.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SỨ MỆNH (Layout 2 cột) -->
+        <section id="mission" class="section-padding">
+            <div class="container mission-container">
+                <div class="mission-content">
+                    <h2 class="section-title">Sứ Mệnh Của Chúng Tôi</h2>
+                    <p class="section-subtitle" style="text-align: left; margin-left: 0;">Tại DEMOBAY, chúng tôi không
+                        chỉ cung cấp một nơi để ở. Chúng tôi cam kết mang đến những trải nghiệm vượt xa mong đợi, tạo ra
+                        những kỷ niệm sâu sắc và kết nối con người với vẻ đẹp đích thực của cuộc sống.</p>
+                    <p>Mỗi chi tiết, từ kiến trúc đến dịch vụ, đều được chăm chút tỉ mỉ để đảm bảo sự hài lòng tuyệt đối
+                        của quý khách. Sứ mệnh của chúng tôi là trở thành biểu tượng của lòng hiếu khách và dịch vụ hoàn
+                        hảo.</p>
+                </div>
+                <div class="mission-image">
+                    <img src="https://decoxdesign.com/upload/images/sanh-khach-san-02-decox-design.jpg"
+                        alt="Sảnh khách sạn sang trọng">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: HÀNH TRÌNH PHÁT TRIỂN (Layout Timeline) -->
+        <section id="history" class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">Hành Trình Phát Triển</h2>
+                <p class="section-subtitle">Nhìn lại những cột mốc quan trọng đã định hình nên DEMOBAY ngày hôm nay.</p>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2018 - Đặt Viên Gạch Đầu Tiên</h3>
+                            <p>Ý tưởng về một khu nghỉ dưỡng đẳng cấp, hòa mình với thiên nhiên được hình thành.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2020 - Chính Thức Khai Trương</h3>
+                            <p>DEMOBAY Hotel & Suites chính thức mở cửa, chào đón những vị khách đầu tiên.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2022 - Mở Rộng Villa & Residences</h3>
+                            <p>Ra mắt bộ sưu tập Villa và Homestay độc đáo, đáp ứng nhu cầu đa dạng của khách hàng.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2024 - Giải Thưởng Uy Tín</h3>
+                            <p>Vinh dự nhận giải "Khu nghỉ dưỡng sang trọng bậc nhất" từ tạp chí du lịch danh tiếng.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: ĐỘI NGŨ (Layout Lưới Card) -->
+        <section id="team" class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Đội Ngũ Tận Tâm</h2>
+                <p class="section-subtitle">Con người là trái tim của DEMOBAY. Gặp gỡ những cá nhân tài năng luôn nỗ lực
+                    hết mình vì trải nghiệm của bạn.</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=388&auto=format&fit=crop"
+                            alt="Team Member 1">
+                        <h3>Nguyễn Lan Anh</h3>
+                        <p>Nhà Sáng Lập & CEO</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=387&auto=format&fit=crop"
+                            alt="Team Member 2">
+                        <h3>Trần Minh Quân</h3>
+                        <p>Tổng Quản Lý</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=387&auto=format&fit=crop"
+                            alt="Team Member 3">
+                        <h3>Lê Hoàng Yến</h3>
+                        <p>Giám Đốc Trải Nghiệm Khách Hàng</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: GIÁ TRỊ CỐT LÕI (Layout Icon) -->
+        <section id="values" class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">Giá Trị Cốt Lõi</h2>
+                <p class="section-subtitle">Những nguyên tắc dẫn lối cho mọi hoạt động và quyết định của chúng tôi.</p>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                        </svg>
+                        <h3>Đẳng Cấp</h3>
+                        <p>Chúng tôi theo đuổi sự xuất sắc trong từng dịch vụ, mang đến chất lượng vượt trội.</p>
+                    </div>
+                    <div class="value-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                        <h3>Tận Tâm</h3>
+                        <p>Sự quan tâm chân thành và chu đáo đến từ trái tim là nền tảng của lòng hiếu khách.</p>
+                    </div>
+                    <div class="value-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                        </svg>
+                        <h3>Bền Vững</h3>
+                        <p>Chúng tôi cam kết bảo vệ môi trường và đóng góp tích cực cho cộng đồng địa phương.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: PHÁT TRIỂN BỀN VỮNG (Layout 2 cột đảo ngược) -->
+        <!-- SECTION 6: CÁC SẢN PHẨM CỦA CHÚNG TÔI (Layout Lưới Card Lớn) -->
+        <section id="products" class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Không Gian Nghỉ Dưỡng Đa Dạng</h2>
+                <p class="section-subtitle">Từ sự sang trọng tuyệt đối của khách sạn, nét biệt lập của villa đến sự ấm
+                    cúng, gần gũi của homestay, chúng tôi mang đến những lựa chọn hoàn hảo cho mọi hành trình.</p>
+
+                <div class="products-grid">
+                    <!-- Product Card 1: Hotel -->
+                    <a href="index.html" class="product-card">
+                        <img class="product-card-bg"
+                            src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
+                            alt="Khách sạn sang trọng">
+                        <div class="product-card-overlay"></div>
+                        <div class="product-card-content">
+                            <h3>Hotels Đẳng Cấp</h3>
+                            <p>Nơi dịch vụ hoàn hảo và tiện nghi hiện đại giao thoa.</p>
+                            <span class="product-link">Khám Phá →</span>
+                        </div>
+                    </a>
+
+                    <!-- Product Card 2: Villa -->
+                    <a href="index.html" class="product-card">
+                        <img class="product-card-bg"
+                            src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=2070&auto=format&fit=crop"
+                            alt="Villa riêng tư">
+                        <div class="product-card-overlay"></div>
+                        <div class="product-card-content">
+                            <h3>Villas Riêng Tư</h3>
+                            <p>Tận hưởng không gian độc quyền giữa thiên nhiên thơ mộng.</p>
+                            <span class="product-link">Khám Phá →</span>
+                        </div>
+                    </a>
+
+                    <!-- Product Card 3: Homestay -->
+                    <a href="index.html" class="product-card">
+                        <img class="product-card-bg"
+                            src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop"
+                            alt="Homestay ấm cúng">
+                        <div class="product-card-overlay"></div>
+                        <div class="product-card-content">
+                            <h3>Homestays Ấm Cúng</h3>
+                            <p>Sống như người bản địa và khám phá văn hóa địa phương.</p>
+                            <span class="product-link">Khám Phá →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <style>
+            /* --- Section 6: OUR PRODUCTS (LAYOUT LƯỚI CARD LỚN) --- */
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                margin-top: 40px;
+            }
+
+            .product-card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                /* Đẩy nội dung xuống dưới */
+                min-height: 450px;
+                border-radius: 12px;
+                overflow: hidden;
+                color: var(--light-text-color);
+                text-decoration: none;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .product-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(13, 76, 92, 0.2);
+            }
+
+            .product-card-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+                transition: transform 0.4s ease;
+            }
+
+            .product-card:hover .product-card-bg {
+                transform: scale(1.1);
+                /* Hiệu ứng zoom ảnh khi hover */
+            }
+
+            .product-card-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+                z-index: 2;
+            }
+
+            .product-card-content {
+                position: relative;
+                z-index: 3;
+                padding: 30px;
+            }
+
+            .product-card-content h3 {
+                font-family: var(--font-heading);
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+
+            .product-card-content p {
+                font-size: 1rem;
+                opacity: 0.9;
+                margin-bottom: 15px;
+            }
+
+            .product-link {
+                font-weight: 600;
+                color: var(--accent-color);
+                display: inline-block;
+                transition: transform 0.3s ease;
+            }
+
+            .product-card:hover .product-link {
+                transform: translateX(5px);
+            }
+        </style>
+        <!-- SECTION 7: CALL TO ACTION -->
+        <section id="cta" class="section-padding cta-section">
+            <div class="container">
+                <h2>Hãy Trở Thành Một Phần <br>Trong Câu Chuyện Của Chúng Tôi</h2>
+                <a href="index.html" class="btn btn-primary">Khám Phá Các Khu Nghỉ Dưỡng</a>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ====================================================== -->
+    <!--                 FOOTER (GIỮ NGUYÊN)                     -->
+    <!-- ====================================================== -->
+    <footer id="footer" class="main-footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ DEMOBAY</h4><a href="#">Câu Chuyện Của Chúng Tôi</a><a href="#">Tuyển Dụng</a><a href="#">Bền
+                        Vững & Cộng Đồng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách & Điều Khoản</a><a
+                        href="#">Sơ Đồ Trang</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@azurebay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram | YouTube</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Demo. All rights reserved.</p>
+                <p>Địa chỉ: Bãi biển An Bàng, Hội An, Quảng Nam, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

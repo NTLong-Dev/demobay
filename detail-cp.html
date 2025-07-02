@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - Ưu Đãi Đặt Phòng Sớm | DEMOBAY</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- BIẾN TOÀN CỤC VÀ RESET --- */
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f7f9fa;
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #e0e0e0;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADER & FOOTER (GIỮ NGUYÊN) --- */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-column a,
+        .footer-column p {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- HERO SECTION --- */
+        .offer-hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-text-color);
+            padding: 20px;
+            background-image: url('https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .offer-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 76, 92, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* --- INTRO SECTION --- */
+        .intro-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        /* --- BENEFITS SECTION --- */
+        .benefits-section {
+            padding: 80px 0;
+            background-color: var(--secondary-color);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .benefit-card {
+            background: #fff;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .benefit-icon svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-1 {
+            grid-column: 1 / 2;
+            grid-row: 1 / 3;
+        }
+
+        .gallery-item-2 {
+            grid-column: 2 / 4;
+            grid-row: 1 / 2;
+        }
+
+        .gallery-item-3 {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        .gallery-item-4 {
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
+        }
+
+        /* --- FINAL CTA SECTION --- */
+        .final-cta-section {
+            padding: 80px 20px;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            text-align: center;
+        }
+
+        .final-cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta-section p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* --- TERMS SECTION --- */
+        .terms-section {
+            padding: 80px 0;
+            background-color: var(--secondary-color);
+        }
+
+        .terms-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .terms-content ul {
+            list-style: none;
+            padding-left: 0;
+            columns: 2;
+            column-gap: 40px;
+        }
+
+        .terms-content ul li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .terms-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 200px);
+            }
+
+            .gallery-item-1 {
+                grid-column: 1 / 3;
+                grid-row: 1 / 2;
+            }
+
+            .gallery-item-2 {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+            }
+
+            .gallery-item-3 {
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+            }
+
+            .gallery-item-4 {
+                grid-column: 1 / 3;
+                grid-row: 3 / 4;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title,
+            .final-cta-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .terms-content ul {
+                columns: 1;
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+
+            .gallery-item-1,
+            .gallery-item-2,
+            .gallery-item-3,
+            .gallery-item-4 {
+                grid-column: auto;
+                grid-row: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Nơi Lưu Trú có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+
+                    .language-selector {
+                        position: relative;
+                    }
+
+                    .language-dropdown {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        right: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 150px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                        z-index: 9999;
+                    }
+
+                    .language-selector:hover .language-dropdown {
+                        display: block;
+                    }
+
+                    .language-dropdown li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .language-dropdown li a {
+                        display: block;
+                        padding: 8px 12px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="logo">DEMOBAY</a>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul class="language-dropdown">
+                        <li><a href="vi/index.html">Tiếng Việt</a></li>
+                        <li><a href="en/index.html">English</a></li>
+                    </ul>
+                </div>
+                <a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="offer-hero">
+            <div class="hero-content">
+                <h1>Ưu Đãi Đặt Phòng Sớm</h1>
+                <p>Tiết kiệm đến 15% khi lên kế hoạch trước cho kỳ nghỉ của bạn.</p>
+                <a href="#booking" class="btn btn-primary">Đặt Ngay & Tiết Kiệm</a>
+            </div>
+        </section>
+
+        <!-- 2. Introduction Section -->
+        <section class="intro-section">
+            <div class="container">
+                <h2 class="section-title">Lên Kế Hoạch Trước, Nhận Thưởng Lớn</h2>
+                <p class="section-subtitle">Tại DEMOBAY, chúng tôi tin rằng sự chuẩn bị chu đáo xứng đáng được tưởng
+                    thưởng. Bằng cách đặt phòng trước, bạn không chỉ đảm bảo có được hạng phòng yêu thích mà còn nhận
+                    được mức giá ưu đãi tốt nhất. Hãy để chúng tôi chăm chút cho từng chi tiết, mang đến cho bạn một kỳ
+                    nghỉ thư thái và trọn vẹn.</p>
+            </div>
+        </section>
+
+        <!-- 3. Benefits Section -->
+        <section class="benefits-section">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center;">Quyền Lợi Độc Quyền Của Bạn</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-9.5c.83 0 1.5.67 1.5 1.5v4c0 .83-.67 1.5-1.5 1.5S10 16.83 10 16v-4c0-.83.67-1.5 1.5-1.5zm3-1.5c.83 0 1.5.67 1.5 1.5v6c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-6c0-.83.67-1.5 1.5-1.5z" />
+                            </svg></div>
+                        <h3>Tiết Kiệm Đến 15%</h3>
+                        <p>Nhận mức giá ưu đãi tốt nhất khi đặt phòng trước ít nhất 14 ngày.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.9 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
+                            </svg></div>
+                        <h3>Bữa Sáng Tự Chọn</h3>
+                        <p>Khởi đầu ngày mới tràn đầy năng lượng với bữa sáng thịnh soạn cho 2 người tại nhà hàng The
+                            Bay.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2l-.01-12zM12 11H4V4h8v7zm2-7v7h7V4h-7z" />
+                            </svg></div>
+                        <h3>Miễn Phí Nâng Hạng</h3>
+                        <p>Cơ hội được nâng hạng phòng miễn phí lên hạng cao hơn (tùy vào tình trạng phòng trống).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center;">Trải Nghiệm Đang Chờ Đón</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item gallery-item-1"><img
+                            src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2070&auto=format&fit=crop"
+                            alt="Phòng ngủ sang trọng"></div>
+                    <div class="gallery-item gallery-item-2"><img
+                            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=2070&auto=format&fit=crop"
+                            alt="Hồ bơi buổi tối"></div>
+                    <div class="gallery-item gallery-item-3"><img
+                            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600"
+                            alt="Nhà hàng sang trọng"></div>
+                    <div class="gallery-item gallery-item-4"><img
+                            src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop"
+                            alt="Dịch vụ spa"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Final CTA Section (Booking) -->
+        <section id="booking" class="final-cta-section">
+            <h2 class="section-title" style="color: var(--light-text-color);">Sẵn Sàng Cho Kỳ Nghỉ Hoàn Hảo?</h2>
+            <p>Đừng bỏ lỡ cơ hội tận hưởng dịch vụ đẳng cấp với mức giá tốt nhất.</p>
+            <a href="#" class="btn btn-primary">Kiểm Tra Phòng Trống & Đặt Ngay</a>
+        </section>
+
+        <!-- 6. Terms Section -->
+        <section class="terms-section">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center;">Điều Khoản & Điều Kiện</h2>
+                <div class="terms-content">
+                    <ul>
+                        <li>Cần đặt phòng trước ít nhất 14 ngày so với ngày nhận phòng.</li>
+                        <li>Ưu đãi áp dụng cho các kỳ nghỉ từ nay đến hết ngày 20/12/2025.</li>
+                        <li>Yêu cầu thanh toán toàn bộ tại thời điểm đặt phòng.</li>
+                        <li>Đặt phòng không được hoàn, hủy hoặc thay đổi.</li>
+                        <li>Phụ thu có thể được áp dụng vào các ngày Lễ, Tết.</li>
+                        <li>Ưu đãi không thể kết hợp với các chương trình khuyến mãi khác.</li>
+                        <li>Miễn phí truy cập Wi-Fi tốc độ cao trong toàn bộ khu nghỉ.</li>
+                        <li>Miễn phí sử dụng hồ bơi, phòng tập thể dục và câu lạc bộ trẻ em.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ DEMOBAY</h4><a href="#">Câu Chuyện Của Chúng Tôi</a><a href="#">Tuyển Dụng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách & Điều Khoản</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@demobay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram | YouTube</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 DEMOBAY. All rights reserved.</p>
+                <p>Địa chỉ: Bãi biển An Bàng, Hội An, Quảng Nam, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

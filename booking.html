@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chọn Phòng - DEMOBAY</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f4f8f9;
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #eaf0f2;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 70px;
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADER & FOOTER (PHONG CÁCH DEMOBAY) --- */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+            transform: translateY(-2px);
+        }
+
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-top h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 12px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50px;
+            color: var(--light-text-color);
+            font-family: var(--font-body);
+        }
+
+        .newsletter-form .btn-primary {
+            padding: 12px 35px;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .footer-column a,
+        .footer-column p {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- TRANG CHỌN PHÒNG --- */
+        .booking-page-wrapper {
+            padding-top: 40px;
+            padding-bottom: 80px;
+        }
+
+        /* Thanh tìm kiếm với Date Picker */
+        .search-summary-bar {
+            background-color: var(--light-text-color);
+            padding: 15px 25px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+
+        .summary-item {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+        }
+
+        .summary-item svg {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            color: var(--primary-color);
+            opacity: 0.7;
+        }
+
+        .summary-item .label {
+            font-size: 0.8rem;
+            color: #777;
+            text-transform: uppercase;
+        }
+
+        .summary-item .value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Bố cục chính */
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .room-selection-column .page-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .filters-toolbar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .filter-btn {
+            background-color: var(--light-text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            border-color: var(--primary-color);
+        }
+
+        /* Danh sách phòng */
+        .room-listing {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .room-card {
+            background-color: var(--light-text-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+        }
+
+        .room-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-details-wrapper {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-info h2 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--primary-color);
+        }
+
+        .room-info p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .amenities-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin: 15px 0;
+        }
+
+        .amenities-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .amenities-list svg {
+            width: 18px;
+            height: 18px;
+            color: var(--primary-color);
+        }
+
+        .rate-offer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .offer-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .offer-details p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .price-action {
+            text-align: right;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        /* Cột Giỏ hàng */
+        .booking-summary {
+            background-color: var(--light-text-color);
+            border-radius: 16px;
+            padding: 25px;
+            position: sticky;
+            top: 110px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .booking-summary h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 20px;
+        }
+
+        .summary-total .label {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .summary-total .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* --- MODAL LỊCH TÙY CHỈNH --- */
+        .calendar-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .calendar-modal-overlay.visible {
+            display: flex;
+        }
+
+        .calendar-container {
+            width: 90%;
+            max-width: 850px;
+            background: var(--light-text-color);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .calendar-modal-overlay.visible .calendar-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .calendar-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .month-view {
+            width: 100%;
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .month-header h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .nav-arrow {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #aaa;
+        }
+
+        .nav-arrow:hover {
+            color: var(--primary-color);
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .day {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 55px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .day-number {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .day-price {
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            opacity: 0.8;
+        }
+
+        .day:not(.disabled):hover {
+            background-color: var(--secondary-color);
+        }
+
+        .day.disabled {
+            cursor: not-allowed;
+            color: #ccc;
+        }
+
+        .day.disabled .day-price {
+            display: none;
+        }
+
+        .day.selected-start,
+        .day.selected-end {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .day.selected-start .day-price,
+        .day.selected-end .day-price {
+            color: var(--light-text-color);
+            opacity: 1;
+        }
+
+        .day.in-range {
+            background-color: #d1e9e4;
+            /* Light teal for range */
+            border-radius: 0;
+        }
+
+        .calendar-footer {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .calendar-main {
+                grid-template-columns: 1fr;
+            }
+
+            .month-view:last-child {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .booking-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-summary {
+                position: static;
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .room-card {
+                grid-template-columns: 1fr;
+            }
+
+            .main-nav ul {
+                display: none;
+            }
+
+            .rate-offer {
+                grid-template-columns: 1fr;
+            }
+
+            .price-action {
+                text-align: left;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Nơi Lưu Trú có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <div class="header-center">
+                <a href="index.html" class="logo">DEMOBAY</a>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul class="language-dropdown">
+                        <li><a href="vi/index.html">Tiếng Việt</a></li>
+                        <li><a href="en/index.html">English</a></li>
+                    </ul>
+                </div>
+                <a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="booking-page-wrapper">
+        <div class="container">
+            <div class="search-summary-bar">
+                <div class="summary-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <div>
+                        <div class="label">Khách</div>
+                        <div class="value">2 người lớn, 0 trẻ em</div>
+                    </div>
+                </div>
+                <div class="summary-item" id="open-calendar-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
+                    </svg>
+                    <div>
+                        <div class="label">Nhận phòng</div>
+                        <div class="value" id="checkin-date-display">Thứ Tư, 02/07/2025</div>
+                    </div>
+                </div>
+                <div class="summary-item" id="open-calendar-trigger-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
+                    </svg>
+                    <div>
+                        <div class="label">Trả phòng</div>
+                        <div class="value" id="checkout-date-display">Thứ Năm, 03/07/2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-layout">
+                <div class="room-selection-column">
+                    <h1 class="page-title">Chọn Phòng</h1>
+                    <div class="filters-toolbar">
+                        <button class="filter-btn active">Tất cả</button>
+                        <button class="filter-btn">Hotel</button>
+                        <button class="filter-btn">Villa</button>
+                        <button class="filter-btn">Homestay</button>
+                    </div>
+                    <div class="room-listing">
+                        <div class="room-card">
+                            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=800"
+                                alt="Căn hộ Studio" class="room-image">
+                            <div class="room-details-wrapper">
+                                <div class="room-info">
+                                    <h2>Homestay beach</h2>
+                                    <p>Không gian mở, hiện đại và đầy đủ tiện nghi, lý tưởng cho các cặp đôi hoặc khách
+                                        đi công tác.</p>
+                                </div>
+                                <div class="rate-offer">
+                                    <div class="offer-details">
+                                        <h4>Giá Linh Hoạt</h4>
+                                        <p>Bao gồm bữa sáng</p>
+                                        <a href="">Chi tiết phòng</a>
+                                    </div>
+                                    <div class="price-action">
+                                        <div class="price">3.100.000 ₫</div>
+                                        <p class="price-note">Mỗi đêm</p>
+                                        <button class="btn btn-primary">Đặt Ngay</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="room-card">
+                            <img src="https://reservations.hoiana.com/shs-ngbe-image-resizer/images/hotel/15136/images/room/hhs_-_deluxe_oceanview_suite_king.jpg"
+                                alt="Căn hộ 1 phòng ngủ" class="room-image">
+                            <div class="room-details-wrapper">
+                                <div class="room-info">
+                                    <h2>Villa Một Phòng Ngủ</h2>
+                                    <p>Phòng khách và phòng ngủ riêng biệt, mang lại sự thoải mái và riêng tư tối đa cho
+                                        kỳ nghỉ của bạn.</p>
+                                </div>
+                                <div class="rate-offer">
+                                    <div class="offer-details">
+                                        <h4>Ưu Đãi Đặt Sớm</h4>
+                                        <p>Tiết kiệm 15% khi đặt trước</p>
+                                        <a href="">Chi tiết phòng</a>
+                                    </div>
+                                    <div class="price-action">
+                                        <div class="price">3.600.000 ₫</div>
+                                        <p class="price-note">Mỗi đêm</p>
+                                        <button class="btn btn-primary">Đặt Ngay</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <aside class="booking-summary">
+                    <h3>Giỏ Hàng Của Bạn</h3>
+                    <p style="color: #777; font-size: 0.9rem;">Chưa có phòng nào được chọn.</p>
+                    <div class="summary-total">
+                        <span class="label">Tổng cộng:</span>
+                        <span class="value">0 ₫</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <div class="calendar-modal-overlay" id="calendar-modal">
+        <div class="calendar-container">
+            <div class="calendar-main" id="calendar-main"></div>
+            <div class="calendar-footer">
+                <button class="btn" id="clear-dates-btn"
+                    style="background:var(--border-color); color:var(--text-color);">Xóa</button>
+                <button class="btn btn-primary" id="apply-dates-btn">Áp dụng</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ DEMOBAY</h4><a href="#">Câu Chuyện</a><a href="#">Tuyển Dụng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@demobay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 DEMOBAY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const calendarMain = document.getElementById('calendar-main');
+            const modal = document.getElementById('calendar-modal');
+            const openTriggers = document.querySelectorAll('#open-calendar-trigger, #open-calendar-trigger-2');
+            const clearBtn = document.getElementById('clear-dates-btn');
+            const applyBtn = document.getElementById('apply-dates-btn');
+            const checkinDisplay = document.getElementById('checkin-date-display');
+            const checkoutDisplay = document.getElementById('checkout-date-display');
+
+            let currentDate = new Date(2025, 6, 1);
+            let checkInDate = new Date('2025-07-02');
+            let checkOutDate = new Date('2025-07-03');
+
+            const priceData = { '2025-7-2': 3.1, '2025-7-3': 3.1, '2025-7-4': 3.1, '2025-8-1': 2.6, '2025-8-2': 2.6 };
+
+            function renderCalendar(year, month) {
+                calendarMain.innerHTML = '';
+                const month1 = new Date(year, month);
+                const month2 = new Date(year, month + 1);
+                calendarMain.appendChild(createMonthView(month1.getFullYear(), month1.getMonth(), true, false));
+                calendarMain.appendChild(createMonthView(month2.getFullYear(), month2.getMonth(), false, true));
+                addDayClickHandlers();
+                updateSelection();
+            }
+
+            function createMonthView(year, month, showPrev, showNext) {
+                const monthContainer = document.createElement('div');
+                monthContainer.className = 'month-view';
+                const monthHeader = document.createElement('div');
+                monthHeader.className = 'month-header';
+                const prevArrow = document.createElement('button');
+                prevArrow.className = 'nav-arrow';
+                prevArrow.innerHTML = '<';
+                if (!showPrev) prevArrow.style.visibility = 'hidden';
+                prevArrow.onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(currentDate.getFullYear(), currentDate.getMonth()); };
+                const monthName = document.createElement('h3');
+                monthName.textContent = `Tháng ${month + 1} Năm ${year}`;
+                const nextArrow = document.createElement('button');
+                nextArrow.className = 'nav-arrow';
+                nextArrow.innerHTML = '>';
+                if (!showNext) nextArrow.style.visibility = 'hidden';
+                nextArrow.onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(currentDate.getFullYear(), currentDate.getMonth()); };
+                monthHeader.appendChild(prevArrow); monthHeader.appendChild(monthName); monthHeader.appendChild(nextArrow);
+
+                const weekdaysContainer = document.createElement('div');
+                weekdaysContainer.className = 'weekdays';
+                ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].forEach(day => {
+                    const weekday = document.createElement('div');
+                    weekday.textContent = day;
+                    weekdaysContainer.appendChild(weekday);
+                });
+
+                const daysGrid = document.createElement('div');
+                daysGrid.className = 'days-grid';
+                const firstDayOfMonth = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const today = new Date(); today.setHours(0, 0, 0, 0);
+                const offset = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1;
+                for (let i = 0; i < offset; i++) { daysGrid.appendChild(document.createElement('div')); }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day';
+                    const currentDateObj = new Date(year, month, day);
+                    dayElement.dataset.date = currentDateObj.toISOString().split('T')[0];
+                    const dayNumber = document.createElement('div');
+                    dayNumber.className = 'day-number';
+                    dayNumber.textContent = day;
+                    const dayPrice = document.createElement('div');
+                    dayPrice.className = 'day-price';
+                    const priceKey = `${year}-${month + 1}-${day}`;
+                    dayPrice.textContent = priceData[priceKey] ? `${priceData[priceKey]} Tr` : '';
+                    dayElement.appendChild(dayNumber);
+                    dayElement.appendChild(dayPrice);
+                    if (currentDateObj < today) { dayElement.classList.add('disabled'); }
+                    daysGrid.appendChild(dayElement);
+                }
+                monthContainer.appendChild(monthHeader);
+                monthContainer.appendChild(weekdaysContainer);
+                monthContainer.appendChild(daysGrid);
+                return monthContainer;
+            }
+
+            function handleDayClick(e) {
+                const target = e.target.closest('.day');
+                if (!target || target.classList.contains('disabled')) return;
+                const date = new Date(target.dataset.date);
+                if (!checkInDate || checkOutDate) { checkInDate = date; checkOutDate = null; }
+                else if (date > checkInDate) { checkOutDate = date; }
+                else { checkInDate = date; checkOutDate = null; }
+                updateSelection();
+            }
+
+            function updateSelection() {
+                document.querySelectorAll('.day').forEach(day => {
+                    day.classList.remove('selected-start', 'selected-end', 'in-range');
+                    const dayDate = new Date(day.dataset.date);
+                    if (checkInDate && dayDate.getTime() === checkInDate.getTime()) day.classList.add('selected-start');
+                    if (checkOutDate && dayDate.getTime() === checkOutDate.getTime()) day.classList.add('selected-end');
+                    if (checkInDate && checkOutDate && dayDate > checkInDate && dayDate < checkOutDate) day.classList.add('in-range');
+                });
+            }
+
+            function addDayClickHandlers() {
+                document.querySelectorAll('.day').forEach(day => day.addEventListener('click', handleDayClick));
+            }
+
+            function formatDateForDisplay(date) {
+                if (!date) return 'Chọn ngày';
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                const weekdays = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+                const weekday = weekdays[date.getDay()];
+                return `${weekday}, ${day}/${month}/${year}`;
+            }
+
+            // Event Listeners
+            openTriggers.forEach(trigger => trigger.addEventListener('click', () => modal.classList.add('visible')));
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('visible'); });
+            clearBtn.addEventListener('click', () => {
+                checkInDate = null;
+                checkOutDate = null;
+                updateSelection();
+                checkinDisplay.textContent = 'Chọn ngày';
+                checkoutDisplay.textContent = 'Chọn ngày';
+            });
+            applyBtn.addEventListener('click', () => {
+                if (checkInDate) checkinDisplay.textContent = formatDateForDisplay(checkInDate);
+                if (checkOutDate) checkoutDisplay.textContent = formatDateForDisplay(checkOutDate);
+                modal.classList.remove('visible');
+            });
+
+            // Initial render
+            checkinDisplay.textContent = formatDateForDisplay(checkInDate);
+            checkoutDisplay.textContent = formatDateForDisplay(checkOutDate);
+            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+    </script>
+
+</body>
+
+</html>

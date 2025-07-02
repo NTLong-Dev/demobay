@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt Động & Giải Trí - DEMOBAY</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- BIẾN TOÀN CỤC VÀ RESET (Giữ nguyên) --- */
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f8fbfd;
+            /* Một màu nền sáng hơn, sạch hơn */
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #e0e0e0;
+            --gold-color: #a38b6a;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* === HEADER (Giữ nguyên y hệt) === */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-gold {
+            background-color: #1aae82;
+            color: var(--light-text-color);
+        }
+
+        .btn-gold:hover {
+            background-color: #b9a07a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /*
+        =======================================================
+                   CSS CHO TRANG HOẠT ĐỘNG & GIẢI TRÍ
+        =======================================================
+        */
+
+        /* --- LAYOUT 1: HERO --- */
+        .activities-hero {
+            padding-top: 80px;
+            /* Bù trừ cho header */
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text-color);
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .activities-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 76, 92, 0.6);
+        }
+
+        .activities-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .activities-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+        }
+
+        .activities-hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin: 1rem auto 0 auto;
+            opacity: 0.9;
+        }
+
+        /* --- LAYOUT 2: CÁC KHỐI HOẠT ĐỘNG --- */
+        .activities-section {
+            padding: 100px 0;
+        }
+
+        .activity-block {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .activity-block:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tự động đảo layout cho các khối chẵn */
+        .activity-block:nth-child(even) .activity-content {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .activity-block:nth-child(even) .activity-image {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .activity-image img {
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .activity-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .activity-content .description {
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        .activity-details {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .activity-details li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .activity-details li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--gold-color);
+            font-weight: 700;
+        }
+
+        .activity-info p {
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .activity-info p strong {
+            color: var(--primary-color);
+        }
+
+        .activity-content .btn {
+            margin-top: 30px;
+        }
+
+        .divider {
+            border: 0;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 0 auto 100px auto;
+            max-width: 1200px;
+        }
+
+
+        /* --- Footer (Giữ nguyên) --- */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-top h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50px;
+            color: var(--light-text-color);
+            padding-left: 20px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color .3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+
+            .main-nav,
+            .header-right .btn-primary {
+                display: none;
+            }
+
+            .header-right {
+                flex: 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .header-left {
+                flex: 0;
+            }
+
+            .activity-block {
+                grid-template-columns: 1fr;
+            }
+
+            /* Reset lại layout xen kẽ trên mobile để ảnh luôn ở trên */
+            .activity-block .activity-content,
+            .activity-block:nth-child(even) .activity-content {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+            }
+
+            .activity-block .activity-image,
+            .activity-block:nth-child(even) .activity-image {
+                grid-column: 1 / 2;
+                grid-row: 1 / 2;
+            }
+
+            .activity-image img {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .activities-hero h1 {
+                font-size: 3rem;
+            }
+
+            .activity-content h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header (Giữ nguyên) -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Trang chủ -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html" class="active">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+
+                    .language-selector {
+                        position: relative;
+                    }
+
+                    .language-dropdown {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        right: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 150px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .language-selector:hover .language-dropdown {
+                        display: block;
+                    }
+
+                    .language-dropdown li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .language-dropdown li a {
+                        display: block;
+                        padding: 8px 12px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <style>
+                .active {
+                    color: #2ABF88 !important;
+                    font-weight: bold;
+                }
+            </style>
+            <div class="header-center">
+                <a href="index.html" class="logo">DEMOBAY</a>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul class="language-dropdown">
+                        <li><a href="vi/index.html">Tiếng Việt</a></li>
+                        <li><a href="en/index.html">English</a></li>
+                    </ul>
+                </div>
+                <a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <!-- SECTION 1: HERO -->
+        <section class="activities-hero">
+            <div class="activities-hero-content">
+                <h1>Hưởng Niềm Vui Bất Tận</h1>
+                <p>Hãy để chúng tôi tìm thấy những hoạt động giải trí, phù hợp với tâm trạng và thể lực của mình tại
+                    DEMOBAY.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CÁC KHỐI HOẠT ĐỘNG -->
+        <section class="activities-section">
+            <div class="container">
+
+                <!-- Hoạt động 1: Thể Thao Dưới Nước -->
+                <div class="activity-block">
+                    <div class="activity-content">
+                        <h2>Thể Thao Dưới Nước</h2>
+                        <p class="description">Cùng trải nghiệm và chiêm ngưỡng vẻ đẹp tuyệt vời của bờ biển dài 4km,
+                            với bức tranh thiên nhiên hùng vĩ và tận hưởng những khoảnh khắc bình minh hay hoàng hôn đầy
+                            mê hoặc.</p>
+                        <ul class="activity-details">
+                            <li>Chèo thuyền Kayak khám phá bờ biển</li>
+                            <li>Lướt ván đứng (SUP) đầy thử thách</li>
+                            <li>Lặn biển ngắm san hô (theo tour)</li>
+                        </ul>
+                        <div class="activity-info">
+                            <p><strong>Giờ hoạt động:</strong> 8:00 – 17:00, hàng ngày</p>
+                            <p><strong>Địa điểm:</strong> Trung tâm Thể thao dưới nước, Bãi biển An Bàng</p>
+                        </div>
+                        <a href="#" class="btn btn-gold">Khám Phá Hoạt Động</a>
+                    </div>
+                    <div class="activity-image">
+                        <img src="https://armyhaus.com/wp-content/uploads/2021/04/cac-loai-thuyen-kayak-01.jpg"
+                            alt="Chèo thuyền Kayak">
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Hoạt động 2: Sân Tennis & Pickleball -->
+                <div class="activity-block">
+                    <div class="activity-content">
+                        <h2>Tennis & Pickleball</h2>
+                        <p class="description">Dù là một tay chơi dày dạn kinh nghiệm hay lần đầu thử sức, sân thể thao
+                            của chúng tôi luôn mang đến sự kết hợp hoàn hảo giữa niềm vui, thể chất và sự cạnh tranh
+                            thân thiện cho mọi lứa tuổi.</p>
+                        <ul class="activity-details">
+                            <li>4 sân tennis hiện đại ngoài trời</li>
+                            <li>2 sân pickleball đạt chuẩn quốc tế</li>
+                            <li>Dịch vụ 5 sao với khăn tắm và nước miễn phí</li>
+                        </ul>
+                        <div class="activity-info">
+                            <p><strong>Giờ hoạt động:</strong> 7:00 – 20:00, hàng ngày</p>
+                            <p><strong>Địa điểm:</strong> Khu phức hợp Thể Thao DEMOBAY</p>
+                        </div>
+                        <a href="#" class="btn btn-gold">Đặt Sân Ngay</a>
+                    </div>
+                    <div class="activity-image">
+                        <img src="https://babolat.com.vn/wp-content/uploads/2024/05/san-tennis-ha-noi.jpg"
+                            alt="Sân Tennis">
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Hoạt động 3: Câu Lạc Bộ Trẻ Em -->
+                <div class="activity-block">
+                    <div class="activity-content">
+                        <h2>Câu Lạc Bộ Trẻ Em</h2>
+                        <p class="description">Được định hướng là khu nghỉ dưỡng dành cho gia đình, câu lạc bộ dành
+                            riêng cho Trẻ em của chúng tôi là một thế giới vui chơi, học hỏi và khám phá được thiết kế
+                            đặc biệt cho những bé của bạn.</p>
+                        <ul class="activity-details">
+                            <li>Khu vui chơi trong nhà với nhà banh, cầu trượt</li>
+                            <li>Các hoạt động nghệ thuật và thủ công hàng ngày</li>
+                            <li>Dịch vụ trông trẻ chuyên nghiệp (có phụ phí)</li>
+                        </ul>
+                        <div class="activity-info">
+                            <p><strong>Giờ hoạt động:</strong> 9:00 – 19:00, hàng ngày</p>
+                            <p><strong>Địa điểm:</strong> Tầng trệt, tòa nhà Residences</p>
+                        </div>
+                        <a href="#" class="btn btn-gold">Xem Lịch Hoạt Động</a>
+                    </div>
+                    <div class="activity-image">
+                        <img src="https://file.hstatic.net/200000365171/file/nhung-phu-kien-bong-da-tre-em-can-chuan-bi_854cc54281b44d66a81faece36f134e3_grande.jpg"
+                            alt="Câu lạc bộ trẻ em">
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Hoạt động 4: Ylang Ylang Spa -->
+                <div class="activity-block">
+                    <div class="activity-content">
+                        <h2>Ylang Ylang Spa</h2>
+                        <p class="description">Trải nghiệm sự thoải mái tuyệt đối tại Ylang Ylang Spa, nơi các liệu pháp
+                            chuyên sâu của chúng tôi được kết hợp từ những truyền thống lâu đời hứa hẹn đem đến cho bạn
+                            những phút giây thư thái.</p>
+                        <ul class="activity-details">
+                            <li>Massage trị liệu toàn thân</li>
+                            <li>Xông hơi, sục Jacuzzi thảo dược</li>
+                            <li>Chăm sóc da mặt chuyên sâu</li>
+                        </ul>
+                        <div class="activity-info">
+                            <p><strong>Giờ hoạt động:</strong> 10:00 – 22:00, hàng ngày</p>
+                            <p><strong>Địa điểm:</strong> Tầng 2, Khách sạn DEMOBAY Hotel & Suites</p>
+                        </div>
+                        <a href="#" class="btn btn-gold">Xem Menu Spa</a>
+                    </div>
+                    <div class="activity-image">
+                        <img src="https://hoamoctamanspa.vn/wp-content/uploads/2022/06/co-so-massage-Body-tri-lieu-tai-ha-noi.jpg"
+                            alt="Spa & Trị liệu">
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (Giữ nguyên) -->
+    <footer id="footer" class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <h3>Đăng ký nhận bản tin khuyến mãi</h3>
+                <form class="newsletter-form"><input type="email" placeholder="Nhập email của bạn"><button type="submit"
+                        class="btn btn-primary">Gửi</button></form>
+            </div>
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ DEMOBAY</h4><a href="#">Câu Chuyện Của Chúng Tôi</a><a href="#">Tuyển Dụng</a><a href="#">Bền
+                        Vững & Cộng Đồng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách & Điều Khoản</a><a
+                        href="#">Sơ Đồ Trang</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@demobay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram | YouTube</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 DEMOBAY. All rights reserved.</p>
+                <p>Địa chỉ: Bãi biển An Bàng, Hội An, Quảng Nam, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

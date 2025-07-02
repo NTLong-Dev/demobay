@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điểm Đến & Trải Nghiệm - DEMOBAY</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* --- BIẾN TOÀN CỤC VÀ RESET (Giữ nguyên) --- */
+        :root {
+            --primary-color: #0d4c5c;
+            --secondary-color: #f8fbfd;
+            --accent-color: #20c997;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --border-color: #ddd;
+            --gold-color: #a38b6a;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            background-color: #fff;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1350px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* === HEADER (Giữ nguyên y hệt) === */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .header-left,
+        .header-right {
+            flex: 1;
+            display: flex;
+            align-items: center
+        }
+
+        .header-right {
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .header-center {
+            flex: 0 1 auto
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0 20px
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+            font-size: 1rem
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width .3s ease
+        }
+
+        .main-nav a:hover::after {
+            width: 100%
+        }
+
+        .language-selector {
+            position: relative;
+            cursor: pointer
+        }
+
+        .globe-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: background-color .2s ease
+        }
+
+        .language-selector:hover .globe-icon-wrapper {
+            background-color: rgba(0, 0, 0, 0.05)
+        }
+
+        .globe-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color)
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            list-style: none;
+            padding: 8px;
+            min-width: 150px;
+            z-index: 10
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block
+        }
+
+        .language-dropdown li a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-weight: 500
+        }
+
+        .language-dropdown li a:hover {
+            background-color: var(--secondary-color)
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1aae82;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /*
+        =======================================================
+                        CSS CHO TRANG ĐIỂM ĐẾN (BẢN MỚI)
+        =======================================================
+        */
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        /* --- LAYOUT 1: HERO (Giữ nguyên) --- */
+        .page-hero {
+            height: 80vh;
+            padding-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: var(--light-text-color);
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(13, 76, 92, 0.6), rgba(13, 76, 92, 0.5));
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1rem auto 0 auto;
+            opacity: 0.9;
+        }
+
+        /* --- LAYOUT 2: FEATURE SECTION (Mới) --- */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+
+        .feature-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-content .highlight {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .feature-list .icon {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            margin-right: 15px;
+            margin-top: -3px;
+        }
+
+        .feature-image img {
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- LAYOUT 3: KEY FEATURES (Mới) --- */
+        .key-features-section {
+            background-color: var(--secondary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* --- LAYOUT 4: GALLERY GRID (Mới) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 350px;
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 76, 92, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            color: white;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay .icon {
+            font-size: 3rem;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay .icon {
+            transform: scale(1);
+        }
+
+        /* --- LAYOUT 5: CTA (Nâng cấp) --- */
+        .cta-section {
+            padding: 100px 0;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Hiệu ứng parallax */
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(13, 76, 92, 0.75);
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* --- Footer (Giữ nguyên) --- */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-top h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            border-radius: 50px;
+            color: var(--light-text-color);
+            padding-left: 20px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color .3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: .9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+
+            .main-nav,
+            .header-right .btn {
+                display: none;
+            }
+
+            .header-right {
+                flex: 0;
+            }
+
+            .header-container {
+                justify-content: space-between;
+            }
+
+            .header-left {
+                flex: 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-image {
+                margin-top: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 300px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<style>
+    .active {
+        color: #2ABF88 !important;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+
+    <!-- Header (Y HỆT BẢN CŨ) -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul>
+                        <!-- Trang chủ -->
+                        <li class="nav-item-dropdown">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+
+                        <!-- Khám Phá có dropdown -->
+                        <li class="nav-item-dropdown">
+                            <a href="about.html" class="active">Khám Phá</a>
+                            <ul class="sub-menu">
+                                <li><a href="travel.html">Điểm Đến Du Lịch</a></li>
+                                <li><a href="entertair.html">Hoạt Động Giải Trí</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </nav>
+                <style>
+                    .main-nav .nav-item-dropdown {
+                        position: relative;
+                    }
+
+                    .main-nav .sub-menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 200px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .main-nav .nav-item-dropdown:hover .sub-menu {
+                        display: block;
+                    }
+
+                    .main-nav .sub-menu li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .main-nav .sub-menu li a {
+                        display: block;
+                        padding: 8px 16px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+
+                    .language-selector {
+                        position: relative;
+                    }
+
+                    .language-dropdown {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        right: 0;
+                        background: #fff;
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        min-width: 150px;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                    }
+
+                    .language-selector:hover .language-dropdown {
+                        display: block;
+                    }
+
+                    .language-dropdown li {
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    .language-dropdown li a {
+                        display: block;
+                        padding: 8px 12px;
+                        color: #333;
+                        text-decoration: none;
+                    }
+                </style>
+            </div>
+            <style>
+                .active {
+                    color: #2ABF88 !important;
+                    font-weight: bold;
+                }
+            </style>
+            <div class="header-center">
+                <a href="index.html" class="logo">DEMOBAY</a>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="coupon.html">Khuyến Mãi</a></li>
+                        <li><a href="contact.html">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+                <div class="language-selector">
+                    <div class="globe-icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <ul class="language-dropdown">
+                        <li><a href="vi/index.html">Tiếng Việt</a></li>
+                        <li><a href="en/index.html">English</a></li>
+                    </ul>
+                </div>
+                <a href="booking.html" class="btn btn-primary">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- SECTION 1: HERO -->
+        <section class="page-hero"
+            style="background-image: url('https://images.unsplash.com/photo-1464241353125-b30586718640?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=eyJhcHBfaWQiOjEyMDd9&ixlib=rb-1.2.1&q=80&w=1080');">
+            <div class="page-hero-content">
+                <h1>Điểm Đến Giàu Trải Nghiệm</h1>
+                <p>Hội tụ trải nghiệm giải trí đỉnh cao, dịch vụ lưu trú sang trọng, di sản văn hóa giàu bản sắc và ẩm
+                    thực phong vị ấm thực độc đáo.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FEATURE SECTION (MỚI) -->
+        <section class="feature-section section-padding">
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-content">
+                        <h2>Vùng Đất Di Sản Miền Trung</h2>
+                        <p class="highlight">DEMOBAY tọa lạc tại một trong những vùng đất giàu văn hóa và đẹp nhất Việt
+                            Nam, nơi giao thoa giữa di sản và thiên nhiên.</p>
+                        <p>Nằm dọc bờ biển thuộc tỉnh Quảng Nam, du khách chỉ mất vài phút để di chuyển đến các địa danh
+                            được UNESCO công nhận là Di Sản Thế Giới như Phố cổ Hội An hay Thánh địa Mỹ Sơn.</p>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="material-icons icon">place</span>
+                                <div><strong>Vị trí đắc địa:</strong> Dễ dàng kết nối với các điểm tham quan nổi tiếng.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="material-icons icon">beach_access</span>
+                                <div><strong>Bờ biển nguyên sơ:</strong> Tận hưởng những bãi biển được bình chọn đẹp
+                                    nhất hành tinh.</div>
+                            </li>
+                            <li>
+                                <span class="material-icons icon">museum</span>
+                                <div><strong>Di sản văn hóa:</strong> Khám phá chiều sâu văn hóa bản địa độc đáo.</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="feature-image">
+                        <img src="https://images.unsplash.com/photo-1509233725247-49e657c54213?q=80&w=800&auto=format&fit=crop"
+                            alt="Bình minh trên biển miền Trung">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 3: KEY FEATURES (MỚI) -->
+        <section class="key-features-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Trải Nghiệm Tinh Hoa</h2>
+                    <p>Khám phá những dịch vụ đẳng cấp và hoạt động đặc sắc làm nên một kỳ nghỉ khó quên tại DEMOBAY.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <a href="#" class="feature-item">
+                        <span class="material-icons icon">restaurant_menu</span>
+                        <h3>Ẩm Thực Tinh Tế</h3>
+                        <p>Hành trình khám phá hương vị địa phương và quốc tế qua bàn tay tài hoa của các đầu bếp hàng
+                            đầu.</p>
+                    </a>
+                    <a href="#" class="feature-item">
+                        <span class="material-icons icon">golf_course</span>
+                        <h3>Sân Golf Đẳng Cấp</h3>
+                        <p>Chinh phục những đường golf đầy thử thách được thiết kế bởi các huyền thoại, giữa khung cảnh
+                            thiên nhiên hùng vĩ.</p>
+                    </a>
+                    <a href="#" class="feature-item">
+                        <span class="material-icons icon">spa</span>
+                        <h3>Spa & Trị Liệu</h3>
+                        <p>Tái tạo năng lượng và tìm lại sự cân bằng cho cơ thể và tâm hồn với các liệu pháp chăm sóc
+                            độc đáo.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GALLERY GRID (MỚI) -->
+        <section class="gallery-grid-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Khoảnh Khắc DEMOBAY</h2>
+                    <p>Lưu giữ những kỷ niệm đẹp trong từng không gian được chăm chút tỉ mỉ của chúng tôi.</p>
+                </div>
+                <div class="gallery-grid">
+                    <a href="#" class="gallery-item">
+                        <img src="https://www.trieuhaotravel.vn/Uploads/images/du_lich_phu_yen3.jpg_large.webp"
+                            alt="Bãi biển hoang sơ">
+                        <div class="gallery-overlay">
+                            <span class="material-icons icon">visibility</span>
+                        </div>
+                    </a>
+                    <a href="#" class="gallery-item">
+                        <img src="https://diff.vn/wp-content/uploads/2025/03/banh-xeo-da-nang-featured.png"
+                            alt="Đặc sản Bánh xèo">
+                        <div class="gallery-overlay">
+                            <span class="material-icons icon">visibility</span>
+                        </div>
+                    </a>
+                    <a href="#" class="gallery-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Cau_Nhat_Ban.jpg"
+                            alt="Chùa Cầu Hội An">
+                        <div class="gallery-overlay">
+                            <span class="material-icons icon">visibility</span>
+                        </div>
+                    </a>
+                    <a href="#" class="gallery-item">
+                        <img src="https://cdn-images.vtv.vn/66349b6076cb4dee98746cf1/2024/07/07/ad-4nxdxvms68ahkd7ydue0bdk4ykptx8h46k-xkvqn6vnkjy2i2dccncqbvlrpqyxlfdfq6hg69zby6nm3gbey6vsk5mkce66-tioxgghhyizonoct3gbiais2kpo6oa9phb8pjd5in3ftt9a4c8l2f-kfg9f30-14143044404420795775997.jpg"
+                            alt="Ngư dân thả lưới">
+                        <div class="gallery-overlay">
+                            <span class="material-icons icon">visibility</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CALL TO ACTION (NÂNG CẤP) -->
+        <section class="cta-section"
+            style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=2070&auto=format&fit=crop');">
+            <div class="container">
+                <h2>Bắt Đầu Hành Trình Của Bạn</h2>
+                <p>Khám phá vẻ đẹp bất tận và những trải nghiệm độc đáo đang chờ đón. Hãy để chúng tôi đồng hành cùng
+                    bạn trong chuyến đi đáng nhớ này.</p>
+                <a href="promotions.html" class="btn btn-primary">Xem Các Ưu Đãi</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <h3>Đăng ký nhận bản tin khuyến mãi</h3>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Nhập email của bạn">
+                    <button type="submit" class="btn btn-primary">Gửi</button>
+                </form>
+            </div>
+            <div class="footer-main">
+                <div class="footer-column">
+                    <h4>VỀ DEMOBAY</h4><a href="#">Câu Chuyện Của Chúng Tôi</a><a href="#">Tuyển Dụng</a><a href="#">Bền
+                        Vững & Cộng Đồng</a>
+                </div>
+                <div class="footer-column">
+                    <h4>HỖ TRỢ</h4><a href="#">Câu Hỏi Thường Gặp</a><a href="#">Chính Sách & Điều Khoản</a><a
+                        href="#">Sơ Đồ Trang</a>
+                </div>
+                <div class="footer-column">
+                    <h4>LIÊN HỆ</h4>
+                    <p>enquiry@demobay.com</p>
+                    <p>Hotline: +84 (0) 123 456 789</p>
+                </div>
+                <div class="footer-column">
+                    <h4>THEO DÕI</h4>
+                    <p>Facebook | Instagram | YouTube</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 DEMOBAY. All rights reserved.</p>
+                <p>Địa chỉ: Bãi biển An Bàng, Hội An, Quảng Nam, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
